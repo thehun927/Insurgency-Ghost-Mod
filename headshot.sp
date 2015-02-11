@@ -35,18 +35,16 @@ public Action:Event_PlayerDeath( Handle:event, const String:name[], bool:dontBro
 	{
 		new victim = GetClientOfUserId( GetEventInt( event, "userid" ) );
 		new attacker = GetClientOfUserId( GetEventInt( event, "attacker" ) );
-		EmitAmbientSound( headshot, true, victim, SNDLEVEL_NORMAL );
+		EmitSoundToAll( headshot );
 		
 		if( victim == attacker )
 		{
 			return Plugin_Handled;
 		}
-		
-		GetClientAbsOrigin( victim );
-		
+				
 		if( GetEventBool( event, "headshot" ) )
 		{
-			EmitAmbientSound( headshot,true, victim, SNDLEVEL_NORMAL );
+			EmitSoundToAll( headshot );
 		}
 	}
 	return Plugin_Continue;
