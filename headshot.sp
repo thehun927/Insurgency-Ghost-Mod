@@ -11,8 +11,6 @@ new Handle:gPluginEnabled;
 
 new bool:g_logheadshots = true;
 
-new Float:iNormal[ 3 ] = { 0.0, 0.0, 1.0 };
-
 public Plugin:myinfo = 
 {
 	name = "HeadShot sounds",
