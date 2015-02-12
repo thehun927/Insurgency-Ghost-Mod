@@ -5,10 +5,11 @@
 #define PLUGIN_VERSION	"1.0"
 #define PLUGIN_AUTHOR	"thehun927"
 #define headshot	"headshot.wav"
-#define:gHeadshot = (GetClientHealth(victim) <= 0 && hitgroup == HITGROUP_HEAD);
 
-//new Handle:g_cvar_headshots = INVALID_HANDLE;
-//new Handle:gPluginEnabled;
+new Handle:g_cvar_headshots = INVALID_HANDLE;
+new Handle:gPluginEnabled;
+
+new bool:g_logheadshots = true;
 
 public Plugin:myinfo = 
 {
@@ -34,14 +35,14 @@ public Action:Event_PlayerDeath( Handle:event, const String:name[], bool:dontBro
 	{
 		new victim = GetClientOfUserId( GetEventInt( event, "userid" ) );
 		new attacker = GetClientOfUserId( GetEventInt( event, "attacker" ) );
-		EmitSoundToAll( headshot );
+		//EmitSoundToAll( headshot );
 		
 		if( victim == attacker )
 		{
 			return Plugin_Handled;
 		}
 				
-		if ( gHeadshot )
+		if ( GetEventBool( event, "headshot" ) )
 		{
 			EmitSoundToAll( headshot );
 		}
