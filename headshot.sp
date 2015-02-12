@@ -70,19 +70,19 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	
 	if (killcount == 5)
 	{
-		EmitSoundToClient (monsterkill);
+		EmitSoundToClient (attacker, monsterkill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 10)
 	{
-		EmitSoundToClient (ludacriskill);
+		EmitSoundToClient (attacker, ludacriskill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 		PrintToChatAll ("\x05 10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 15)
 	{
-		EmitSoundToClient (holyshit);
+		EmitSoundToClient (attacker, holyshit, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 		PrintToChatAll ("\x05 15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
@@ -122,13 +122,13 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 			
 				if (gHeadshots == 5)
 				{
-					EmitSoundToClient (dominating);
+					EmitSoundToClient (attacker, dominating, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 					PrintToChatAll ("\x05 5 Headshots by %N, DOMINATING", GetClientOfUserId(GetEventInt(event, "attacker")));
 				}
 	
 				if (gHeadshots == 10)
 				{
-					EmitSoundToClient (godlike);
+					EmitSoundToClient (attacker, godlike, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 					PrintToChatAll ("\x05 10 headshots by %N, GODLIKE", GetClientOfUserId(GetEventInt(event, "attacker")));
 				}
 	
