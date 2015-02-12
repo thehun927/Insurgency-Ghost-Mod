@@ -2,11 +2,13 @@
 #include <sdktools>
 #include <loghelper>
 #include <wstatshelper>
+#include <clientprefs>
 
 #pragma semicolon 1
+
 #define PLUGIN_VERSION	"1.0"
 #define PLUGIN_AUTHOR	"RIPPEDnFADED"
-//#define MAX_DEFINABLE_WEAPONS 100
+
 #define headshot	"quake/headshot.wav"
 #define monsterkill "quake/monsterkill.wav"
 #define ludacriskill "quake/ludacriskill.wav"
@@ -16,10 +18,9 @@
 #define godlike "quake/godlike.wav"
 #define dominating "quake/dominating.wav"
 #define combowhore "quake/combowhore.wav"
+#define multikill "quake/multikill.wav"
 
 new g_kill_stats[MAXPLAYERS+1][15];
-//new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
-
 
 public Plugin:myinfo = 
 {
@@ -33,7 +34,8 @@ public OnPluginStart()
 {
 	HookEvent( "player_death", Event_PlayerDeath );
 	HookEvent( "player_hurt", Event_PlayerHurt );
-	CreateConVar("sm_headshot", PLUGIN_VERSION, "UT4 Sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
+	CreateConVar("sm_ut4sounds", PLUGIN_VERSION, "UT4 Sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
+	//RegConsoleCmd("sm_ut4sounds", Command_ut4sounds, "On/Off ut4 sounds");
 }
 public OnMapStart() 
 {	
@@ -46,6 +48,7 @@ public OnMapStart()
 	AddFileToDownloadsTable("sound/quake/dominating.wav");
 	AddFileToDownloadsTable("sound/quake/godlike.wav");
 	AddFileToDownloadsTable("sound/quake/combowhore.wav");
+	AddFileToDownloadsTable("sound/quake/multikill.wav");
 	PrecacheSound( headshot, true );
 	PrecacheSound( monsterkill, true );
 	PrecacheSound( ludacriskill, true );
@@ -55,11 +58,14 @@ public OnMapStart()
 	PrecacheSound( dominating, true );
 	PrecacheSound( godlike, true );
 	PrecacheSound( combowhore, true );
+	PrecacheSound( multikill, true );
+	//AutoExecConfig(true);
 }
+
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
-	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+	new victim   	= GetClientOfUserId(GetEventInt(event, "userid"));
+	new attacker 	= GetClientOfUserId(GetEventInt(event, "attacker"));
 	//decl String:weapon[32];
 	//GetEventString(event, "weapon", weapon, sizeof(weapon));
 	
@@ -70,29 +76,35 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	
 	if (killcount == 5)
 	{
-		EmitSoundToClient (attacker, monsterkill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
+		EmitSoundToClient (attacker, multikill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 10)
 	{
+		EmitSoundToClient (attacker, monsterkill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
+		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
+	}
+	
+	if (killcount == 15)
+	{
 		EmitSoundToClient (attacker, ludacriskill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 		PrintToChatAll ("\x05 10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
-	if (killcount == 15)
+	if (killcount == 20)
 	{
 		EmitSoundToClient (attacker, holyshit, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 		PrintToChatAll ("\x05 15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
-	if (killcount == 20)
+	if (killcount == 25)
 	{
 		EmitSoundToAll (rampage);
 		PrintToChatAll ("\x05 20 kills by %N, RAMPAGE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
-	if (killcount == 25)
+	if (killcount == 30)
 	{
 		EmitSoundToAll (unstoppable);
 		PrintToChatAll ("\x05 25 kills by %N, UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
@@ -115,6 +127,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		}
 		if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))
 		{
+		
 			g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
 			new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
 			gHeadshots++;
@@ -142,3 +155,9 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	}
 	return Plugin_Continue;
 }
+
+/***************************************************************
+			P L U G I N    F U N C T I O N S
+****************************************************************/
+
+
