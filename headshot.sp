@@ -1,5 +1,6 @@
 #include <sourcemod>
 #include <sdktools>
+#include <cstrike>
 
 #pragma semicolon 1
 #define PLUGIN_VERSION	"1.0"
