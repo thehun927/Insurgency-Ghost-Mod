@@ -19,6 +19,7 @@
 #define dominating "quake/dominating.wav"
 #define combowhore "quake/combowhore.wav"
 #define multikill "quake/multikill.wav"
+#define humiliation "quake/humiliation.wav"
 
 new g_kill_stats[MAXPLAYERS+1][15];
 
@@ -36,7 +37,6 @@ public OnPluginStart()
 	HookEvent( "player_death", Event_PlayerDeath );
 	HookEvent( "player_hurt", Event_PlayerHurt );
 	CreateConVar("sm_ut4sounds", PLUGIN_VERSION, "UT4 Sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
-	//RegConsoleCmd("sm_ut4sounds", Command_ut4sounds, "On/Off ut4 sounds");
 }
 
 public OnMapStart() 
@@ -51,6 +51,8 @@ public OnMapStart()
 	AddFileToDownloadsTable("sound/quake/godlike.wav");
 	AddFileToDownloadsTable("sound/quake/combowhore.wav");
 	AddFileToDownloadsTable("sound/quake/multikill.wav");
+	AddFileToDownloadsTable("sound/quake/humiliation.wav");
+	PrecacheSound( humiliation, true);
 	PrecacheSound( headshot, true );
 	PrecacheSound( monsterkill, true );
 	PrecacheSound( ludacriskill, true );
@@ -108,6 +110,12 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 		EmitSoundToAll (unstoppable);
 		PrintHintTextToAll ("30 kills, %N is UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
+	
+	if (g_kill_stats[victim][LOG_HIT_KILLS] > 10)
+	{
+		EmitSoundToAll (humiliation);
+		PrintHintTextToAll ("%N was killed at a %d killstreak", victim, g_kill_stats[victim][LOG_HIT_KILLS]);
+	}
 
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 	g_kill_stats[victim][LOG_HIT_HEADSHOTS] = 0;
@@ -155,56 +163,4 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	}
 	return Plugin_Continue;
 }
-
-/* public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
-{
-	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
-	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-	//PrintToServer("[LOGGER] PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
-	if (attacker > 0 && attacker != victim)
-	{
-		new hitgroup  = GetEventInt(event, "hitgroup");
-		if (hitgroup < 8)
-		{
-			hitgroup += LOG_HIT_OFFSET;
-		}
-		if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))
-		{
-		
-			g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
-			new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
-			gHeadshots++;
-			EmitSoundToClient (attacker, headshot, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-			PrintToChatAll("\x04 A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
-			
-				if (gHeadshots == 5)
-				{
-					EmitSoundToClient (attacker, dominating, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-					PrintToChatAll ("\x05 5 Headshots by %N, DOMINATING", GetClientOfUserId(GetEventInt(event, "attacker")));
-				}
-	
-				if (gHeadshots == 10)
-				{
-					EmitSoundToClient (attacker, godlike, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-					PrintToChatAll ("\x05 10 headshots by %N, GODLIKE", GetClientOfUserId(GetEventInt(event, "attacker")));
-				}
-	
-				if (gHeadshots == 15)
-				{
-					EmitSoundToAll (combowhore);
-					PrintToChatAll ("\x05 15 headshots by %N, COMBOWHORE", GetClientOfUserId(GetEventInt(event, "attacker")));
-				}
-		}
-	}
-	return Plugin_Continue;
-}*/
-
-/***************************************************************
-			P L U G I N    F U N C T I O N S
-****************************************************************/
-
-/***************************************************************
-			P L U G I N    F U N C T I O N S
-****************************************************************/
-
 
