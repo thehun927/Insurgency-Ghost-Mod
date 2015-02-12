@@ -1,12 +1,11 @@
 #include <sourcemod>
 #include <sdktools>
-#include <regex>
 #include <loghelper>
 #include <wstatshelper>
 
 #pragma semicolon 1
 #define PLUGIN_VERSION	"1.0"
-#define PLUGIN_AUTHOR	"thehun927"
+#define PLUGIN_AUTHOR	"RIPPEDnFADED"
 //#define MAX_DEFINABLE_WEAPONS 100
 #define headshot	"quake/headshot.wav"
 #define monsterkill "quake/monsterkill.wav"
@@ -21,9 +20,9 @@ new g_kill_stats[MAXPLAYERS+1][15];
 
 public Plugin:myinfo = 
 {
-	name = "HeadShot sounds",
+	name = "UT4 Sounds",
 	author = PLUGIN_AUTHOR,
-	description = "Headshot Sound Effect.",
+	description = "Unreal Tournament Sound Effects",
 	version = PLUGIN_VERSION,
 	url = "info.420blaze.me"
 };
@@ -31,7 +30,7 @@ public OnPluginStart()
 {
 	HookEvent( "player_death", Event_PlayerDeath );
 	HookEvent( "player_hurt", Event_PlayerHurt );
-	CreateConVar("sm_headshot", PLUGIN_VERSION, "HeadShot sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
+	CreateConVar("sm_headshot", PLUGIN_VERSION, "UT4 Sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
 }
 public OnMapStart() 
 {	
@@ -63,31 +62,31 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	if (killcount == 5)
 	{
 		EmitSoundToAll (monsterkill);
-		PrintToChatAll ("5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 10)
 	{
 		EmitSoundToAll (ludacriskill);
-		PrintToChatAll ("10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintToChatAll ("\x05 10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 15)
 	{
 		EmitSoundToAll (holyshit);
-		PrintToChatAll ("15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintToChatAll ("\x05 15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 20)
 	{
 		EmitSoundToAll (rampage);
-		PrintToChatAll ("20 kills by %N, RAMPAGE", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintToChatAll ("\x05 20 kills by %N, RAMPAGE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 25)
 	{
 		EmitSoundToAll (unstoppable);
-		PrintToChatAll ("25 kills by %N, UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintToChatAll ("\x05 25 kills by %N, UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 }
