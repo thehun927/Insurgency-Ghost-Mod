@@ -20,6 +20,8 @@
 #define combowhore "quake/combowhore.wav"
 #define multikill "quake/multikill.wav"
 #define humiliation "quake/humiliation.wav"
+#define killingspree "quake/killingspree.wav"
+#define wickedsick "quake/wickedsick.wav"
 
 new g_kill_stats[MAXPLAYERS+1][15];
 
@@ -52,6 +54,10 @@ public OnMapStart()
 	AddFileToDownloadsTable("sound/quake/combowhore.wav");
 	AddFileToDownloadsTable("sound/quake/multikill.wav");
 	AddFileToDownloadsTable("sound/quake/humiliation.wav");
+	AddFileToDownloadsTable("sound/quake/killingspree.wav");
+	AddFileToDownloadsTable("sound/quake/wickedsick.wav");
+	PrecacheSound( killingspree, true);
+	PrecacheSound( wickedsick, true);
 	PrecacheSound( humiliation, true);
 	PrecacheSound( headshot, true );
 	PrecacheSound( monsterkill, true );
@@ -109,6 +115,18 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		EmitSoundToAll (unstoppable);
 		PrintHintTextToAll ("30 kills, %N is UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
+	}
+	
+	if (killcount == 50)
+	{
+		EmitSoundToAll (killingspree);
+		PrintHintTextToAll ("50 kills, %N is on a Killing Spree", GetClientOfUserId(GetEventInt(event, "attacker")));
+	}
+	
+	if (killcount == 100)
+	{
+		EmitSoundToAll (wickedsick);
+		PrintHintTextToAll ("100 kills, %N is WICKEDSICK", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (g_kill_stats[victim][LOG_HIT_KILLS] > 10)
