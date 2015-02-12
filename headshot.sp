@@ -99,6 +99,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	}
 
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
+	g_kill_stats[victim][LOG_HIT_HEADSHOTS] = 0;
 }
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -117,7 +118,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 			g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
 			new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
 			gHeadshots++;
-			EmitSoundToAll (headshot);
+			EmitSoundToClient (attacker, headshot, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
 			PrintToChatAll("\x04 A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
 			
 				if (gHeadshots == 5)
