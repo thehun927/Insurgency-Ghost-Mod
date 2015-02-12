@@ -107,7 +107,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		{
 			LogPlayerEvent(attacker, "triggered", "headshot");
 			EmitSoundToAll (headshot);
-			PrintToChatAll("A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
+			PrintToChatAll("\x04 A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
 		}
 	}
 	return Plugin_Continue;
