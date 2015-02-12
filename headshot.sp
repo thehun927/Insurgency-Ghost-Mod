@@ -12,6 +12,8 @@
 #define monsterkill "quake/monsterkill.wav"
 #define ludacriskill "quake/ludacriskill.wav"
 #define holyshit "quake/holyshit.wav"
+#define unstoppable "quake/unstoppable.wav"
+#define rampage "quake/rampage.wav"
 
 new g_kill_stats[MAXPLAYERS+1][15];
 //new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
@@ -37,10 +39,14 @@ public OnMapStart()
 	AddFileToDownloadsTable("sound/quake/monsterkill.wav");
 	AddFileToDownloadsTable("sound/quake/ludacriskill.wav");
 	AddFileToDownloadsTable("sound/quake/holyshit.wav");
+	AddFileToDownloadsTable("sound/quake/unstoppable.wav");
+	AddFileToDownloadsTable("sound/quake/rampage.wav");
 	PrecacheSound( headshot, true );
 	PrecacheSound( monsterkill, true );
 	PrecacheSound( ludacriskill, true );
 	PrecacheSound( holyshit, true );
+	PrecacheSound( unstoppable, true );
+	PrecacheSound( rampage, true );
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -57,19 +63,31 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	if (killcount == 5)
 	{
 		EmitSoundToAll (monsterkill);
-		PrintToChatAll ("5 kills by %s", attacker);
+		PrintToChatAll ("5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 10)
 	{
 		EmitSoundToAll (ludacriskill);
-		PrintToChatAll ("10 kills by %s", attacker);
+		PrintToChatAll ("10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 15)
 	{
 		EmitSoundToAll (holyshit);
-		PrintToChatAll ("15 kills by %s", attacker);
+		PrintToChatAll ("15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
+	}
+	
+	if (killcount == 20)
+	{
+		EmitSoundToAll (rampage);
+		PrintToChatAll ("20 kills by %N, RAMPAGE", GetClientOfUserId(GetEventInt(event, "attacker")));
+	}
+	
+	if (killcount == 25)
+	{
+		EmitSoundToAll (unstoppable);
+		PrintToChatAll ("25 kills by %N, UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 }
@@ -89,7 +107,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		{
 			LogPlayerEvent(attacker, "triggered", "headshot");
 			EmitSoundToAll (headshot);
-			PrintToChatAll("A glorious headshot by %s", attacker);
+			PrintToChatAll("A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
 		}
 	}
 	return Plugin_Continue;
