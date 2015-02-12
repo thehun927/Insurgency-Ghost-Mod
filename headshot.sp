@@ -4,7 +4,7 @@
 #pragma semicolon 1
 #define PLUGIN_VERSION	"1.0"
 #define PLUGIN_AUTHOR	"thehun927"
-#define headshot	"quake/headshot.wav"
+#define headshot	"headshot.wav"
 
 new Handle:g_cvar_headshots = INVALID_HANDLE;
 new Handle:gPluginEnabled;
@@ -42,7 +42,7 @@ public Action:Event_PlayerDeath( Handle:event, const String:name[], bool:dontBro
 			return Plugin_Handled;
 		}
 				
-		if( GetEventBool( event, "headshot" ) )
+		if ( GetEventBool( event, "headshot" ) )
 		{
 			EmitSoundToAll( headshot );
 		}
