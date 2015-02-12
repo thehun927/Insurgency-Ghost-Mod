@@ -13,6 +13,9 @@
 #define holyshit "quake/holyshit.wav"
 #define unstoppable "quake/unstoppable.wav"
 #define rampage "quake/rampage.wav"
+#define godlike "quake/godlike.wav"
+#define dominating "quake/dominating.wav"
+#define combowhore "quake/combowhore.wav"
 
 new g_kill_stats[MAXPLAYERS+1][15];
 //new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
@@ -40,12 +43,18 @@ public OnMapStart()
 	AddFileToDownloadsTable("sound/quake/holyshit.wav");
 	AddFileToDownloadsTable("sound/quake/unstoppable.wav");
 	AddFileToDownloadsTable("sound/quake/rampage.wav");
+	AddFileToDownloadsTable("sound/quake/dominating.wav");
+	AddFileToDownloadsTable("sound/quake/godlike.wav");
+	AddFileToDownloadsTable("sound/quake/combowhore.wav");
 	PrecacheSound( headshot, true );
 	PrecacheSound( monsterkill, true );
 	PrecacheSound( ludacriskill, true );
 	PrecacheSound( holyshit, true );
 	PrecacheSound( unstoppable, true );
 	PrecacheSound( rampage, true );
+	PrecacheSound( dominating, true );
+	PrecacheSound( godlike, true );
+	PrecacheSound( combowhore, true );
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -61,19 +70,19 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	
 	if (killcount == 5)
 	{
-		EmitSoundToAll (monsterkill);
+		EmitSoundToClient (monsterkill);
 		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 10)
 	{
-		EmitSoundToAll (ludacriskill);
+		EmitSoundToClient (ludacriskill);
 		PrintToChatAll ("\x05 10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 15)
 	{
-		EmitSoundToAll (holyshit);
+		EmitSoundToClient (holyshit);
 		PrintToChatAll ("\x05 15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
@@ -88,6 +97,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 		EmitSoundToAll (unstoppable);
 		PrintToChatAll ("\x05 25 kills by %N, UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
+
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 }
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
@@ -104,9 +114,29 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		}
 		if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))
 		{
-			LogPlayerEvent(attacker, "triggered", "headshot");
+			g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
+			new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
+			gHeadshots++;
 			EmitSoundToAll (headshot);
 			PrintToChatAll("\x04 A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
+			
+				if (gHeadshots == 5)
+				{
+					EmitSoundToClient (dominating);
+					PrintToChatAll ("\x05 5 Headshots by %N, DOMINATING", GetClientOfUserId(GetEventInt(event, "attacker")));
+				}
+	
+				if (gHeadshots == 10)
+				{
+					EmitSoundToClient (godlike);
+					PrintToChatAll ("\x05 10 headshots by %N, GODLIKE", GetClientOfUserId(GetEventInt(event, "attacker")));
+				}
+	
+				if (gHeadshots == 15)
+				{
+					EmitSoundToAll (combowhore);
+					PrintToChatAll ("\x05 15 headshots by %N, COMBOWHORE", GetClientOfUserId(GetEventInt(event, "attacker")));
+				}
 		}
 	}
 	return Plugin_Continue;
