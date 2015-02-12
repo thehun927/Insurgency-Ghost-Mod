@@ -30,6 +30,7 @@ public Plugin:myinfo =
 	version = PLUGIN_VERSION,
 	url = "info.420blaze.me"
 };
+
 public OnPluginStart()
 {
 	HookEvent( "player_death", Event_PlayerDeath );
@@ -37,6 +38,7 @@ public OnPluginStart()
 	CreateConVar("sm_ut4sounds", PLUGIN_VERSION, "UT4 Sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
 	//RegConsoleCmd("sm_ut4sounds", Command_ut4sounds, "On/Off ut4 sounds");
 }
+
 public OnMapStart() 
 {	
 	AddFileToDownloadsTable("sound/quake/headshot.wav");
@@ -59,15 +61,12 @@ public OnMapStart()
 	PrecacheSound( godlike, true );
 	PrecacheSound( combowhore, true );
 	PrecacheSound( multikill, true );
-	//AutoExecConfig(true);
 }
 
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new victim   	= GetClientOfUserId(GetEventInt(event, "userid"));
 	new attacker 	= GetClientOfUserId(GetEventInt(event, "attacker"));
-	//decl String:weapon[32];
-	//GetEventString(event, "weapon", weapon, sizeof(weapon));
 	
 	g_kill_stats[attacker][LOG_HIT_KILLS]++;
 	g_kill_stats[victim][LOG_HIT_DEATHS]++;
@@ -77,43 +76,87 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	if (killcount == 5)
 	{
 		EmitSoundToClient (attacker, multikill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintHintTextToAll ("\%N 5 killstreak MULTIKILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 10)
 	{
 		EmitSoundToClient (attacker, monsterkill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-		PrintToChatAll ("\x05 5 kills by %N, MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintHintTextToAll ("\%N is on a 10 killstreak MONSTER KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 15)
 	{
 		EmitSoundToClient (attacker, ludacriskill, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-		PrintToChatAll ("\x05 10 kills by %N, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintHintTextToAll ("%N is on a 15 killstreak, LUDICROUS KILL", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 20)
 	{
-		EmitSoundToClient (attacker, holyshit, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-		PrintToChatAll ("\x05 15 kills by %N, HOLY SHIT", GetClientOfUserId(GetEventInt(event, "attacker")));
+		EmitSoundToAll (holyshit);
+		PrintHintTextToAll ("HOLY SHIT, %N is at a 20 killstreak", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 25)
 	{
 		EmitSoundToAll (rampage);
-		PrintToChatAll ("\x05 20 kills by %N, RAMPAGE", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintHintTextToAll ("%N is on a RAMPAGE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 	
 	if (killcount == 30)
 	{
 		EmitSoundToAll (unstoppable);
-		PrintToChatAll ("\x05 25 kills by %N, UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
+		PrintHintTextToAll ("30 kills, %N is UNSTOPPABLE", GetClientOfUserId(GetEventInt(event, "attacker")));
 	}
 
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 	g_kill_stats[victim][LOG_HIT_HEADSHOTS] = 0;
 }
+
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
+	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+
+	if (attacker > 0 && attacker != victim)
+	{
+		new hitgroup  = GetEventInt(event, "hitgroup");
+		if (hitgroup < 8)
+		{
+			hitgroup += LOG_HIT_OFFSET;
+		}
+		if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))
+		{
+		
+			g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
+			new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
+			gHeadshots++;
+			EmitSoundToClient (attacker, headshot, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
+			PrintHintTextToAll("A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
+			
+				if (gHeadshots == 5)
+				{
+					EmitSoundToAll (dominating);
+					PrintHintTextToAll ("5 Headshots, %N is DOMINATING", GetClientOfUserId(GetEventInt(event, "attacker")));
+				}
+	
+				if (gHeadshots == 10)
+				{
+					EmitSoundToAll (godlike);
+					PrintHintTextToAll ("10 headshots, %N is GODLIKE", GetClientOfUserId(GetEventInt(event, "attacker")));
+				}
+	
+				if (gHeadshots == 15)
+				{
+					EmitSoundToAll (combowhore);
+					PrintHintTextToAll ("%N is a combowhore with 15 headshots", GetClientOfUserId(GetEventInt(event, "attacker")));
+				}
+		}
+	}
+	return Plugin_Continue;
+}
+
+/* public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
 	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
@@ -154,7 +197,11 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		}
 	}
 	return Plugin_Continue;
-}
+}*/
+
+/***************************************************************
+			P L U G I N    F U N C T I O N S
+****************************************************************/
 
 /***************************************************************
 			P L U G I N    F U N C T I O N S
