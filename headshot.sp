@@ -7,12 +7,13 @@
 #pragma semicolon 1
 #define PLUGIN_VERSION	"1.0"
 #define PLUGIN_AUTHOR	"thehun927"
-#define headshot	"headshot.wav"
+#define MAX_DEFINABLE_WEAPONS 100
+#define headshot	"quake/headshot.wav"
+#define monsterkill "quake/monsterkill.wav"
 
-new Handle:g_cvar_headshots = INVALID_HANDLE;
-new Handle:gPluginEnabled;
+new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][15];
+new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 
-new bool:g_logheadshots = true;
 
 public Plugin:myinfo = 
 {
@@ -24,34 +25,37 @@ public Plugin:myinfo =
 };
 public OnPluginStart()
 {
+	HookEvent( "player_death", Event_PlayerDeath );
 	HookEvent( "player_hurt", Event_PlayerHurt );
 	CreateConVar("sm_headshot", PLUGIN_VERSION, "HeadShot sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
-	gPluginEnabled = CreateConVar( "sm_headshot", "1" );
 }
 public OnMapStart() 
-{
+{	
+	AddFileToDownloadsTable("sound/quake/headshot.wav");
+	AddFileToDownloadsTable("sound/quake/monsterkill.wav");
 	PrecacheSound( headshot, true );
+	PrecacheSound( monsterkill, true);
 }
-/*public Action:Event_PlayerDeath( Handle:event, const String:name[], bool:dontBroadcast )
+public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if( GetConVarInt( gPluginEnabled ) == 1 )
+	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
+	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+	decl String:weapon[32];
+	GetEventString(event, "weapon", weapon, sizeof(weapon));
+	new weapon_index = g_client_last_weapon[attacker];
+	if (weapon_index < 0)
 	{
-		new victim = GetClientOfUserId( GetEventInt( event, "userid" ) );
-		new attacker = GetClientOfUserId( GetEventInt( event, "attacker" ) );
-		//EmitSoundToAll( headshot );
-		
-		if( victim == attacker )
-		{
-			return Plugin_Handled;
-		}
-				
-		if ( GetEventBool( event, "headshot" ) )
-		{
-			EmitSoundToAll( headshot );
-		}
+		return;
 	}
-	return Plugin_Continue;
-}*/
+	
+	g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]++;
+	g_weapon_stats[victim][weapon_index][LOG_HIT_DEATHS]++;
+	
+	if (g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS] == 3)
+	{
+		EmitSoundToAll (monsterkill);
+	}
+}
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new victim   = GetClientOfUserId(GetEventInt(event, "victim"));
@@ -68,6 +72,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		{
 			LogPlayerEvent(attacker, "triggered", "headshot");
 			EmitSoundToAll (headshot);
+			//PrintToChatAll(attacker, "with a glorious headshot");
 		}
 	}
 	return Plugin_Continue;
