@@ -3,6 +3,7 @@
 #include <loghelper>
 #include <wstatshelper>
 #include <clientprefs>
+#include <smlib>
 
 #pragma semicolon 1
 
@@ -22,11 +23,10 @@ public OnPluginStart()
 {
 	LoadTranslations("common.phrases");
 	LoadTranslations("myplugin.phrases");
-
-	RegConsoleCmd("sm_perks", Cmd_sm_perks)
+	RegConsoleCmd("sm_perks5", Cmd_sm_perks5);
 }
 
-public Action:Cmd_sm_perks(client, args)
+public Action:Cmd_sm_perks5(client, args)
 {
 	if (client == 0)
 	{
@@ -42,7 +42,7 @@ ShowMenu(client)
 	new Handle:menu = CreateMenu(mh_Perks5, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
 	SetMenuTitle(menu, "Perks5");
 
-	AddMenuItem(menu, "RPG", "RPG");
+	AddMenuItem(menu, "AT4", "AT4");
 	AddMenuItem(menu, "C4", "C4");
 
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
@@ -59,14 +59,16 @@ public mh_Perks5(Handle:menu, MenuAction:action, param1, param2)
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
 
-			if (StrEqual(item, "RPG"))
+			if (StrEqual(item, "AT4"))
 			{
-				PrintHintTextToAll("Gave RPG");
+				PrintHintTextToAll("Gave AT4");
+				GivePlayerItem(param1, "weapon_at4");
 
 			}
 			else if (StrEqual(item, "C4"))
 			{
 				PrintHintTextToAll("Gave C4");
+				GivePlayerItem(param1, "weapon_c4_ied");
 
 			}
 		}
