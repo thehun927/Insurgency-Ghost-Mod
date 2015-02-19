@@ -42,11 +42,13 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 {
 	new victim   	= GetClientOfUserId(GetEventInt(event, "userid"));
 	new attacker 	= GetClientOfUserId(GetEventInt(event, "attacker"));
+	new hitgroup  = GetEventInt(event, "hitgroup");
 	
 	g_kill_stats[attacker][LOG_HIT_KILLS]++;
 	g_kill_stats[victim][LOG_HIT_DEATHS]++;
 	
 	new killcount = g_kill_stats[attacker][LOG_HIT_KILLS];
+	new headshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
 	
 	if (killcount == 10)
 	{
@@ -56,6 +58,17 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	if (killcount == 20)
 	{
 		ShowMenuPrimary(attacker);
+	}
+	
+	if (killcount == 30)
+	{
+		ShowMenuGrenade(attacker);
+	}
+	
+	if (headshots == 10)
+	{
+		GivePlayerItem(attacker, "weapon_rpg");
+		PrintToChat(attacker, "10 headshots for RPG");
 	}
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 }
@@ -88,7 +101,6 @@ public wShotty(Handle:menu, MenuAction:action, param1, param2)
 			if (StrEqual(item, "M590"))
 			{
 				GivePlayerItem(param1, "weapon_m590");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
@@ -101,7 +113,6 @@ public wShotty(Handle:menu, MenuAction:action, param1, param2)
 			else if (StrEqual(item, "TOZ"))
 			{
 				GivePlayerItem(param1, "weapon_toz");
-				//SetEntProp("weapon_toz", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
@@ -319,6 +330,113 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 			{
 				new String:translation[128];
 				Format(translation, sizeof(translation), "%T", "MK18", param1);
+				return RedrawMenuItem(translation);
+			}
+		}
+
+	}
+	return 0;
+}
+
+ShowMenuGrenade(client)
+{
+	new Handle:menu = CreateMenu(wGrenade, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
+	SetMenuTitle(menu, "wGrenade");
+
+	AddMenuItem(menu, "ANM14", "ANM 14");
+	AddMenuItem(menu, "Grenade", "Grenade");
+	AddMenuItem(menu, "Molotov", "Molotov");
+	AddMenuItem(menu, "Smoke", "Smoke Grenade");
+	AddMenuItem(menu, "Flash", "Flash Grenade");
+
+	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+}
+
+public wGrenade(Handle:menu, MenuAction:action, param1, param2)
+{
+	switch (action)
+	{
+		case MenuAction_Select:
+		{
+			//param1 is client, param2 is item
+
+			new String:item[64];
+			GetMenuItem(menu, param2, item, sizeof(item));
+
+			if (StrEqual(item, "ANM14"))
+			{
+				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "weapon_anm14");
+
+			}
+			else if (StrEqual(item, "Grenade"))
+			{
+				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "weapon_m67");
+
+			}
+			else if (StrEqual(item, "Molotov"))
+			{
+				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "weapon_molotov");
+
+			}
+			else if (StrEqual(item, "Smoke"))
+			{
+				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "weapon_m18");
+
+			}
+			else if (StrEqual(item, "Flash"))
+			{
+				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "weapon_m84");
+
+			}
+		}
+
+		case MenuAction_End:
+		{
+			//param1 is MenuEnd reason, if canceled param2 is MenuCancel reason
+			CloseHandle(menu);
+
+		}
+
+		case MenuAction_DisplayItem:
+		{
+			//param1 is client, param2 is item
+
+			new String:item[64];
+			GetMenuItem(menu, param2, item, sizeof(item));
+
+			if (StrEqual(item, "ANM14"))
+			{
+				new String:translation[128];
+				Format(translation, sizeof(translation), "%T", "ANM 14", param1);
+				return RedrawMenuItem(translation);
+			}
+			else if (StrEqual(item, "Grenade"))
+			{
+				new String:translation[128];
+				Format(translation, sizeof(translation), "%T", "Grenade", param1);
+				return RedrawMenuItem(translation);
+			}
+			else if (StrEqual(item, "Molotov"))
+			{
+				new String:translation[128];
+				Format(translation, sizeof(translation), "%T", "Molotov", param1);
+				return RedrawMenuItem(translation);
+			}
+			else if (StrEqual(item, "Smoke"))
+			{
+				new String:translation[128];
+				Format(translation, sizeof(translation), "%T", "Smoke Grenade", param1);
+				return RedrawMenuItem(translation);
+			}
+			else if (StrEqual(item, "Flash"))
+			{
+				new String:translation[128];
+				Format(translation, sizeof(translation), "%T", "Flash Grenade", param1);
 				return RedrawMenuItem(translation);
 			}
 		}
