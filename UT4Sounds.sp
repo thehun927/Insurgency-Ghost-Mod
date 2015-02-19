@@ -37,7 +37,6 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	HookEvent( "player_death", Event_PlayerDeath );
-	HookEvent( "player_hurt", Event_PlayerHurt );
 	CreateConVar("sm_ut4sounds", PLUGIN_VERSION, "UT4 Sounds", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_REPLICATED | FCVAR_NOTIFY );
 }
 
@@ -75,11 +74,43 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 {
 	new victim   	= GetClientOfUserId(GetEventInt(event, "userid"));
 	new attacker 	= GetClientOfUserId(GetEventInt(event, "attacker"));
+	new killcount = g_kill_stats[attacker][LOG_HIT_KILLS];
+	new hitgroup  = GetEventInt(event, "hitgroup");
 	
 	g_kill_stats[attacker][LOG_HIT_KILLS]++;
 	g_kill_stats[victim][LOG_HIT_DEATHS]++;
 	
-	new killcount = g_kill_stats[attacker][LOG_HIT_KILLS];
+	if (hitgroup < 8)
+	{
+		hitgroup += LOG_HIT_OFFSET;
+	}
+	
+	if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))
+	{
+	
+		g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
+		new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
+		gHeadshots++;
+		EmitSoundToClient (attacker, headshot, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
+		PrintCenterTextAll("A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
+			
+			if (gHeadshots == 5)
+			{
+				EmitSoundToAll (dominating);
+				PrintHintTextToAll ("5 Headshots, %N is DOMINATING", GetClientOfUserId(GetEventInt(event, "attacker")));
+			}
+
+			if (gHeadshots == 10)
+			{
+				EmitSoundToAll (godlike);
+				PrintHintTextToAll ("10 headshots, %N is GODLIKE", GetClientOfUserId(GetEventInt(event, "attacker")));
+			}
+			if (gHeadshots == 15)
+			{
+				EmitSoundToAll (combowhore);
+				PrintHintTextToAll ("%N is a combowhore with 15 headshots", GetClientOfUserId(GetEventInt(event, "attacker")));
+			}
+	}
 	
 	if (killcount == 5)
 	{
@@ -138,47 +169,3 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 	g_kill_stats[victim][LOG_HIT_HEADSHOTS] = 0;
 }
-
-public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
-{
-	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
-	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-
-	if (attacker > 0 && attacker != victim)
-	{
-		new hitgroup  = GetEventInt(event, "hitgroup");
-		if (hitgroup < 8)
-		{
-			hitgroup += LOG_HIT_OFFSET;
-		}
-		if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))
-		{
-		
-			g_kill_stats[attacker][LOG_HIT_HEADSHOTS]++;
-			new gHeadshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
-			gHeadshots++;
-			EmitSoundToClient (attacker, headshot, SOUND_FROM_PLAYER, SNDCHAN_STATIC);
-			PrintHintTextToAll("A glorious headshot by %N",  GetClientOfUserId(GetEventInt(event, "attacker")));
-			
-				if (gHeadshots == 5)
-				{
-					EmitSoundToAll (dominating);
-					PrintHintTextToAll ("5 Headshots, %N is DOMINATING", GetClientOfUserId(GetEventInt(event, "attacker")));
-				}
-	
-				if (gHeadshots == 10)
-				{
-					EmitSoundToAll (godlike);
-					PrintHintTextToAll ("10 headshots, %N is GODLIKE", GetClientOfUserId(GetEventInt(event, "attacker")));
-				}
-	
-				if (gHeadshots == 15)
-				{
-					EmitSoundToAll (combowhore);
-					PrintHintTextToAll ("%N is a combowhore with 15 headshots", GetClientOfUserId(GetEventInt(event, "attacker")));
-				}
-		}
-	}
-	return Plugin_Continue;
-}
-
