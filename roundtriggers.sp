@@ -92,15 +92,8 @@ public Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 			GivePlayerItem(client, "weapon_m9");
 			new pistol = GetPlayerWeaponSlot(client, 1);
 			SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", pistol);
-			
-			//Attila's Additions
-			SetConVarFlags(FindConVar("sv_cheats"), GetConVarFlags(FindConVar("sv_cheats")) & ~FCVAR_NOTIFY);
-			SetConVarBool(FindConVar("sv_cheats"), true, false, false);
-			FakeClientCommand(client, "give_ammo 8");	
-			SetConVarBool(FindConVar("sv_cheats"), false, false, false);
-			
-			//SetEntProp(pistol, Prop_Data, "m_iClip1", 99);
-			//SetEntProp(pistol, Prop_Data, "m_iPrimaryAmmoCount", 99);
+			SetEntProp(pistol, Prop_Data, "m_iClip1", 9999);
+			SetEntProp(pistol, Prop_Data, "m_iPrimaryAmmoCount", 9999);
 			SetEntProp(client, Prop_Data, "m_iMaxHealth", 125);
 			SetEntProp(client, Prop_Send, "m_iHealth", 125);
 			
