@@ -1,0 +1,108 @@
+"#base" "zombie.theater"
+
+"theater"
+{
+	"teams"
+	{
+		"security"
+		{
+			"squads"
+			{
+				// assault squad
+				"#Fireteam_Alpha"	// small arms
+				{
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+					"#Squad_Fireteam_Leader_Specialist"				"template_specialist_security"
+				}
+			}
+		}
+		
+		"insurgents"
+		{
+			"squads"
+			{
+				// assault group
+				"#Cell_Alpha"
+				{
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+				}
+				
+				// scout cell
+				"#Cell_Bravo"
+				{
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+				}
+				
+				// additional cell
+				"#Cell_Charlie"
+				{
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+				}
+				
+				// additional cell
+				"#Cell_Delta"
+				{
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Leader_Militant"				"template_militant_insurgent"
+				}
+			}
+		}
+		"player_templates"
+		{
+			"template_specialist_security"
+			{
+				"team"				"security"
+				"buy_order"
+				{
+					"gear"		"sec_chest_carrier"
+					"weapon"	"weapon_m9"	
+				}
+				"allowed_weapons"
+				{
+				}
+			}
+			
+			"template_militant_insurgent"
+			{
+				"team"				"insurgents"
+				"buy_order"
+				{
+					"weapon"	"weapon_kabar"
+				}
+			}
+		}
+	}	
+}
