@@ -90,6 +90,32 @@
 					"#Squad_Cell_Militant"				"template_militant_insurgent"
 					"#Squad_Cell_Militant"				"template_militant_insurgent"
 				}
+				
+				// additional cell
+				"#Cell_Echo"
+				{
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+				}
+				
+				// additional cell
+				"#Cell_Foxtrot"
+				{
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent"
+				}
 			}
 		}
 		"player_templates"
@@ -101,18 +127,18 @@
 					"player"				"models/characters/security_light.mdl"
 					"viewmodel_hands"		"models/weapons/v_hands_sec_l.mdl"
 				}
-				"team"				"security"
+				"team"						"security"
 				"buy_order"
 				{
-					"gear"		"sec_chest_carrier"
-					"weapon"	"weapon_m9"	
-					"weapon"	"weapon_kabar"
+					"gear"					"sec_chest_carrier"
+					"weapon"				"weapon_m9"	
+					"weapon"				"weapon_kabar"
 				}
 				"allowed_weapons"
 				{
-					"gear"		"sec_chest_carrier"
-					"weapon"	"weapon_m9"	
-					"weapon"	"weapon_kabar"
+					"gear"					"sec_chest_carrier"
+					"weapon"				"weapon_m9"	
+					"weapon"				"weapon_kabar"
 				}
 			}
 			
@@ -120,17 +146,17 @@
 			{
 				"models"
 				{
-					"player"			"models/characters/insurgent_sapper.mdl"
-					"viewmodel_hands" 	"models/weapons/v_hands_ins_l.mdl"
+					"player"				"models/characters/insurgent_sapper.mdl"
+					"viewmodel_hands" 		"models/weapons/v_hands_ins_l.mdl"
 				}
-				"team"				"insurgents"
+				"team"						"insurgents"
 				"buy_order"
 				{
-					"weapon"	"weapon_kabar"
+					"weapon"				"weapon_kabar"
 				}
 				"allowed_weapons"
 				{
-					"weapon"	"weapon_kabar"
+					"weapon"				"weapon_kabar"
 				}
 			}
 		}
