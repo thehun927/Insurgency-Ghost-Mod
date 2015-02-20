@@ -25,6 +25,8 @@ public OnPluginStart()
 	LoadTranslations("myplugin.phrases");
 	HookEvent( "player_death", Event_PlayerDeath );
 	RegConsoleCmd("sm_shotty", Cmd_sm_shotty);
+	RegConsoleCmd("sm_primary", Cmd_sm_primary);
+	RegConsoleCmd("sm_grenade", Cmd_sm_grenade);
 }
 
 public Action:Cmd_sm_shotty(client, args)
@@ -35,6 +37,28 @@ public Action:Cmd_sm_shotty(client, args)
 		return Plugin_Handled;
 	}
 	ShowMenuShotgun(client);
+	return Plugin_Handled;
+}
+
+public Action:Cmd_sm_primary(client, args)
+{
+	if (client == 0)
+	{
+		ReplyToCommand(client, "%t", "Command is in-game only");
+		return Plugin_Handled;
+	}
+	ShowMenuPrimary(client);
+	return Plugin_Handled;
+}
+
+public Action:Cmd_sm_grenade(client, args)
+{
+	if (client == 0)
+	{
+		ReplyToCommand(client, "%t", "Command is in-game only");
+		return Plugin_Handled;
+	}
+	ShowMenuGrenade(client);
 	return Plugin_Handled;
 }
 
@@ -365,31 +389,31 @@ public wGrenade(Handle:menu, MenuAction:action, param1, param2)
 
 			if (StrEqual(item, "ANM14"))
 			{
-				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "gear_chest_carrier");
 				GivePlayerItem(param1, "weapon_anm14");
 
 			}
 			else if (StrEqual(item, "Grenade"))
 			{
-				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "gear_chest_carrier");
 				GivePlayerItem(param1, "weapon_m67");
 
 			}
 			else if (StrEqual(item, "Molotov"))
 			{
-				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "gear_chest_carrier");
 				GivePlayerItem(param1, "weapon_molotov");
 
 			}
 			else if (StrEqual(item, "Smoke"))
 			{
-				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "gear_chest_carrier");
 				GivePlayerItem(param1, "weapon_m18");
 
 			}
 			else if (StrEqual(item, "Flash"))
 			{
-				GivePlayerItem(param1, "sec_chest_carrier");
+				GivePlayerItem(param1, "gear_chest_carrier");
 				GivePlayerItem(param1, "weapon_m84");
 
 			}
