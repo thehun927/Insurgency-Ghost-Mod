@@ -24,9 +24,10 @@ public OnPluginStart()
 	LoadTranslations("common.phrases");
 	LoadTranslations("myplugin.phrases");
 	HookEvent( "player_death", Event_PlayerDeath );
+	HookEvent( "player_spawn", Event_PlayerSpawn);
 	RegConsoleCmd("sm_shotty", Cmd_sm_shotty);
 	RegConsoleCmd("sm_primary", Cmd_sm_primary);
-	RegConsoleCmd("sm_grenade", Cmd_sm_grenade);
+	RegConsoleCmd("sm_explosive", Cmd_sm_grenade);
 }
 
 public Action:Cmd_sm_shotty(client, args)
@@ -58,8 +59,13 @@ public Action:Cmd_sm_grenade(client, args)
 		ReplyToCommand(client, "%t", "Command is in-game only");
 		return Plugin_Handled;
 	}
-	ShowMenuGrenade(client);
+	ShowMenuExplosive(client);
 	return Plugin_Handled;
+}
+
+public Action:Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
+{ 
+	g_kill_stats[MAXPLAYERS][LOG_HIT_KILLS] = 0;
 }
 
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
@@ -86,7 +92,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	
 	if (killcount == 30)
 	{
-		ShowMenuGrenade(attacker);
+		ShowMenuExplosive(attacker);
 	}
 	
 	if (headshots == 10)
@@ -101,7 +107,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 ShowMenuShotgun(client)
 {
 	new Handle:menu = CreateMenu(wShotty, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
-	SetMenuTitle(menu, "wShotty");
+	SetMenuTitle(menu, "CHOOSE A SHOTGUN");
 
 	AddMenuItem(menu, "M590", "M590");
 	AddMenuItem(menu, "TOZ", "TOZ");
@@ -183,7 +189,7 @@ public wShotty(Handle:menu, MenuAction:action, param1, param2)
 ShowMenuPrimary(client)
 {
 	new Handle:menu = CreateMenu(wPrimary, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
-	SetMenuTitle(menu, "wPrimary");
+	SetMenuTitle(menu, "CHOOSE AN ASSAULT RIFLE");
 
 	AddMenuItem(menu, "MP5K", "MP5K");
 	AddMenuItem(menu, "UMP45", "UMP45");
@@ -362,21 +368,20 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 	return 0;
 }
 
-ShowMenuGrenade(client)
+ShowMenuExplosive(client)
 {
-	new Handle:menu = CreateMenu(wGrenade, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
-	SetMenuTitle(menu, "wGrenade");
+	new Handle:menu = CreateMenu(wExplosive, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
+	SetMenuTitle(menu, "CHOOSE AN EXPLOSIVE");
 
-	AddMenuItem(menu, "ANM14", "ANM 14");
-	AddMenuItem(menu, "Grenade", "Grenade");
-	AddMenuItem(menu, "Molotov", "Molotov");
-	AddMenuItem(menu, "Smoke", "Smoke Grenade");
-	AddMenuItem(menu, "Flash", "Flash Grenade");
+	AddMenuItem(menu, "RPG", "RPG");
+	AddMenuItem(menu, "AT4", "AT4");
+	AddMenuItem(menu, "C4", "C4");
+	AddMenuItem(menu, "IED", "IED");
 
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 }
 
-public wGrenade(Handle:menu, MenuAction:action, param1, param2)
+public wExplosive(Handle:menu, MenuAction:action, param1, param2)
 {
 	switch (action)
 	{
@@ -387,36 +392,27 @@ public wGrenade(Handle:menu, MenuAction:action, param1, param2)
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
 
-			if (StrEqual(item, "ANM14"))
+			if (StrEqual(item, "RPG"))
 			{
-				GivePlayerItem(param1, "gear_chest_carrier");
-				GivePlayerItem(param1, "weapon_anm14");
+				GivePlayerItem(param1, "weapon_rpg7");
 
 			}
-			else if (StrEqual(item, "Grenade"))
+			else if (StrEqual(item, "AT4"))
 			{
-				GivePlayerItem(param1, "gear_chest_carrier");
-				GivePlayerItem(param1, "weapon_m67");
+				GivePlayerItem(param1, "weapon_at4");
 
 			}
-			else if (StrEqual(item, "Molotov"))
+			else if (StrEqual(item, "C4"))
 			{
-				GivePlayerItem(param1, "gear_chest_carrier");
-				GivePlayerItem(param1, "weapon_molotov");
+				GivePlayerItem(param1, "weapon_c4");
 
 			}
-			else if (StrEqual(item, "Smoke"))
+			else if (StrEqual(item, "IED"))
 			{
-				GivePlayerItem(param1, "gear_chest_carrier");
-				GivePlayerItem(param1, "weapon_m18");
+				GivePlayerItem(param1, "weapon_c4_ied");
 
 			}
-			else if (StrEqual(item, "Flash"))
-			{
-				GivePlayerItem(param1, "gear_chest_carrier");
-				GivePlayerItem(param1, "weapon_m84");
-
-			}
+			
 		}
 
 		case MenuAction_End:
@@ -433,36 +429,31 @@ public wGrenade(Handle:menu, MenuAction:action, param1, param2)
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
 
-			if (StrEqual(item, "ANM14"))
+			if (StrEqual(item, "RPG"))
 			{
 				new String:translation[128];
-				Format(translation, sizeof(translation), "%T", "ANM 14", param1);
+				Format(translation, sizeof(translation), "%T", "RPG", param1);
 				return RedrawMenuItem(translation);
 			}
-			else if (StrEqual(item, "Grenade"))
+			else if (StrEqual(item, "AT4"))
 			{
 				new String:translation[128];
-				Format(translation, sizeof(translation), "%T", "Grenade", param1);
+				Format(translation, sizeof(translation), "%T", "AT4", param1);
 				return RedrawMenuItem(translation);
 			}
-			else if (StrEqual(item, "Molotov"))
+			else if (StrEqual(item, "C4"))
 			{
 				new String:translation[128];
-				Format(translation, sizeof(translation), "%T", "Molotov", param1);
+				Format(translation, sizeof(translation), "%T", "C4", param1);
 				return RedrawMenuItem(translation);
 			}
-			else if (StrEqual(item, "Smoke"))
+			else if (StrEqual(item, "IED"))
 			{
 				new String:translation[128];
-				Format(translation, sizeof(translation), "%T", "Smoke Grenade", param1);
+				Format(translation, sizeof(translation), "%T", "IED", param1);
 				return RedrawMenuItem(translation);
 			}
-			else if (StrEqual(item, "Flash"))
-			{
-				new String:translation[128];
-				Format(translation, sizeof(translation), "%T", "Flash Grenade", param1);
-				return RedrawMenuItem(translation);
-			}
+
 		}
 
 	}
