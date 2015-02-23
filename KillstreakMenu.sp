@@ -22,7 +22,7 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	LoadTranslations("common.phrases");
-	LoadTranslations("myplugin.phrases");
+	//LoadTranslations("myplugin.phrases");
 	HookEvent( "player_death", Event_PlayerDeath );
 	HookEvent( "player_spawn", Event_PlayerSpawn);
 	RegConsoleCmd("sm_shotty", Cmd_sm_shotty);
@@ -404,7 +404,7 @@ public wExplosive(Handle:menu, MenuAction:action, param1, param2)
 			}
 			else if (StrEqual(item, "C4"))
 			{
-				GivePlayerItem(param1, "weapon_c4");
+				GivePlayerItem(param1, "weapon_c4_clicker");
 
 			}
 			else if (StrEqual(item, "IED"))
