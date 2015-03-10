@@ -134,10 +134,9 @@ public wShotty(Handle:menu, MenuAction:action, param1, param2)
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
-				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 20");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);				
+								
 				
 			}
 			else if (StrEqual(item, "TOZ"))
@@ -147,9 +146,9 @@ public wShotty(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 20");
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);
+				
 
 			}
 		}
@@ -221,9 +220,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+					
 
 			}
 			else if (StrEqual(item, "UMP45"))
@@ -234,9 +233,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+						
 
 			}
 			else if (StrEqual(item, "AK74"))
@@ -247,9 +246,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+						
 
 			}
 			else if (StrEqual(item, "AKM"))
@@ -260,9 +259,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+						
 
 			}
 			else if (StrEqual(item, "M16A4"))
@@ -273,9 +272,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+				
 
 			}
 			else if (StrEqual(item, "M4A1"))
@@ -286,9 +285,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+						
 
 			}
 			else if (StrEqual(item, "MK18"))
@@ -299,9 +298,9 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 				
 				//giving 20 ammo
-				SetConVarBool(FindConVar("sv_cheats"), true, false, false);
+				UnCheat(param1);
 				FakeClientCommand(param1, "give_ammo 3");	
-				SetConVarBool(FindConVar("sv_cheats"), false, false, false);			
+				
 
 			}
 		}
@@ -459,3 +458,25 @@ public wExplosive(Handle:menu, MenuAction:action, param1, param2)
 	}
 	return 0;
 }
+
+UnCheat(client)
+{
+		new flags;
+		flags  = GetCommandFlags("give_ammo");
+		flags &= ~FCVAR_CHEAT;
+		flags &= ~FCVAR_SPONLY;
+		SetCommandFlags("give_ammo", flags);
+}
+
+/*weapon upgrades
+remove_upgrade "mol launcher"
+give_upgrade "he launcher"
+kills = 100 for m9z
+kills = 150 for attachments
+"HE Launcher"
+"SM Launcher"
+"FLR Launcher"
+"MOL Launcher"
+"INC Launcher"
+*/
+
