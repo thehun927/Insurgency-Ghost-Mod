@@ -8,29 +8,28 @@
 		{
 			"squads"
 			{
-				// assault squad
-				"#Fireteam_Alpha"	// small arms
+				// Smoke Squad
+				"420 Zombie Blazers"	// Big Blunts
 				{
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
+					"The Dude"				"template_specialist_security"
+					"Stoner"				"template_specialist_security"
+					"Hippie"				"template_specialist_security"
+					"Blazer"				"template_specialist_security"
+					"Pothead"				"template_specialist_security"
+					"Blockhead"				"template_specialist_security"
+					"Bongmaster"			"template_specialist_security"
+					"Burnout"				"template_specialist_security"
 				}
-				// bravo squad
-				"#Fireteam_Bravo"
+				"420 Zombie Blazers"	// Long Bongs	
 				{
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
-					"#Squad_Fireteam_Specialist"				"template_specialist_security"
+					"Baker"					"template_specialist_security"
+					"Gardner"				"template_specialist_security"
+					"Dealer"				"template_specialist_security"
+					"Enforcer"				"template_specialist_security"
+					"Pimp"					"template_specialist_security"
+					"Runner"				"template_specialist_security"
+					"Lookout"				"template_specialist_security"
+					"Snitch"				"template_specialist_security"
 				}
 			}
 		}
@@ -42,123 +41,1111 @@
 				// assault group
 				"#Cell_Alpha"
 				{
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
 				}
-				
-				// scout cell
 				"#Cell_Bravo"
 				{
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
 				}
-				
-				// additional cell
 				"#Cell_Charlie"
 				{
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
 				}
-				
-				// additional cell
 				"#Cell_Delta"
 				{
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
 				}
-				
-				// additional cell
 				"#Cell_Echo"
 				{
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
 				}
-				
-				// additional cell
 				"#Cell_Foxtrot"
 				{
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
-					"#Squad_Cell_Militant"				"template_militant_insurgent"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
+					"#Squad_Cell_Militant"				"template_militant_insurgent_z"
 				}
 			}
 		}
-		"player_templates"
+	}
+	
+	"player_templates"
+	{
+		"template_specialist_security"
 		{
-			"template_specialist_security"
+			"team"						"security"
+			"print_name"		"420 Zombie Blazers"
+				
+			"models"
 			{
-				"models"
-				{
-					"player"				"models/characters/security_light.mdl"
-					"viewmodel_hands"		"models/weapons/v_hands_sec_l.mdl"
-				}
-				"team"						"security"
-				"buy_order"
-				{
-					"gear"					"sec_chest_carrier"
-					"weapon"				"weapon_m9"	
+			"player"				"models/characters/civilian_vip_02.mdl"
+			"viewmodel_hands"		"models/weapons/v_hands_sec_l.mdl"
+			}
+			"buy_order"
+			{
 					"weapon"				"weapon_kabar"
-				}
-				"allowed_weapons"
-				{
+					"weapon"				"weapon_m9"
+					"weapon"				"weapon_m9Z"
 					"gear"					"sec_chest_carrier"
-					"weapon"				"weapon_m9"	
+					"weapon_upgrade"		"sec_flashlight_pistol"
+					"weapon_upgrade"		"HE Launcher"
+					"weapon_upgrade"		"SM Launcher"
+					"weapon_upgrade"		"FLR Launcher"
+					"weapon_upgrade"		"MOL Launcher"
+					"weapon_upgrade"		"INC Launcher"
+			}
+			"allowed_weapons"
+			{
 					"weapon"				"weapon_kabar"
+					"weapon"				"weapon_m9"
+					"weapon"				"weapon_m9Z"
+					"gear"					"sec_chest_carrier"
+					"weapon_upgrade"		"sec_flashlight_pistol"
+					"weapon_upgrade"		"HE Launcher"
+					"weapon_upgrade"		"SM Launcher"
+					"weapon_upgrade"		"FLR Launcher"
+					"weapon_upgrade"		"MOL Launcher"
+					"weapon_upgrade"		"INC Launcher"
+			}
+		}
+			
+		"template_militant_insurgent_z"
+		{
+			"team"						"insurgents"
+			"print_name"		"The Greatful Dead"
+			"models"
+			{
+			"player"				"models/characters/civilian_vip.mdl"
+			"viewmodel_hands" 		"models/weapons/v_hands_sec_l.mdl"
+			}
+			"buy_order"
+			{
+					"weapon"				"weapon_kabar"
+			}
+			"allowed_weapons"
+			{
+					"weapon"				"weapon_kabar"
+					"weapon"				"weapon_M9Z"
+			}
+		}
+	}
+	
+	"player_gear"
+	{
+		"sec_chest_carrier"
+		{
+			"gear_cost"		"0"
+			"gear_weight"	"0"
+			"extra_ammo"
+			{
+					"primary"       "8"
+                     "secondary"     "8"
+                     //"explosive"     "4"
+            }
+		}
+		
+		"?nightmap"
+		{
+			"sec_nightvision"
+			{
+				"print_name"	"#gear_nvg"
+				"print_desc"	"#gear_nvg_desc"
+				"gear_slot"		"accessory"
+				"gear_cost"		"1"
+				"gear_weight"	"30"
+				"entity"		"nvg"
+				"model"			"models/characters/a_nightvision.mdl"
+				
+				"settings"
+				{
+					"material"	"dev/sec_nightvision"
+					"sound_on"	"Weapon_NVG.NvgOn"
+					"sound_off"	"Weapon_NVG.NvgOff"
+					"chromatic_aberation" "0"
+					"dust_power" "1.2"
+					
+					"fade_in_time"	"0.3"
+					"fade_in_hold"	"0.1"
+					"fade_in_tonemap"	"170"
+					
+					"fade_out_time"	"0.5"
+					"fade_out_hold"	"0.1"
+				}
+				
+				"team_access"	"security"
+			}
+		}
+	}
+	
+	"weapons"
+	{
+		"weapon_kabar"
+		{
+			"weapon_cost"					"0"
+			"weapon_weight"					"0"
+		}
+		
+		"weapon_m9"
+		{
+			"import"						"pistol_base"
+			"weapon_class"					"pistol"
+			"print_name"					"#weapon_m9"
+			"print_desc"					"#weapon_m9_desc"
+			"view_model"					"models/weapons/v_beretta.mdl"
+			"world_model"					"models/weapons/w_m9.mdl"
+			"rounds_per_minute"				"900"
+			"weapon_slot"					"secondary"
+			"act_table"						"pistol"
+			"weapon_abilities"				"ironsight"
+			"weapon_weight"					"0"
+			"weapon_cost"					"0"
+			"class_restricted"				"0"
+			"barrel_length"					"10"
+			
+			"fov"
+			{
+				"fov_plr_ironsight"			"-10"
+				"fov_plr_focus"				"-10"
+				"fov_wpn_default"			"74"
+				"fov_wpn_sprint"			"93"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"79"
+			}
+			"viewmodel_offsets"
+			{
+				// x back, y left, z down
+				"VMOffsetStand"					"0.15 0.75 0.75"
+			}
+			"sounds"
+			{
+				"shot_single"				"Weapon_M9.Single"
+				"shot_single_local"			"Weapon_M9.SingleLocal"
+				"shot_silent"				"Weapon_M9.SingleSilenced"
+				"shot_silent_local"			"Weapon_M9.SingleSilencedLocal"
+				"empty"						"Weapon_M9.Empty"
+				"magin"						"Weapon_M9.Clipin"
+				"magout"					"Weapon_M9.Clipout"
+				"slide_back"				"Weapon_M9.slideback"
+				"slide_forward"				"Weapon_M9.slideforward"
+				"safety"					"Weapon_M9.safety"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m9_1p"
+				"particle_muzzleflash_3rd"	"muzzleflash_m9_3rd"
+				"particle_tracer"			"weapon_tracers_green"	
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"				"-1.15 1.45"
+				"recoil_vertical_range"				"2.55 3.6"
+				"recoil_aim_punch"					"0.65 0.75"
+				"recoil_rest_rate"					"4"
+				"recoil_rest_delay"					"0.18"
+				"recoil_roll_range"					"-1.35 -1.35"
+				"recoil_roll_rest_rate"				"180"
+				"recoil_shot_reset_time" 			"0.75"	// Time delay for resetting the shots fired counter for the above (default = 0.3)
+				"recoil_punch_additive_factor" 		"0.85"	// How much of the view punch from the previous shot(s) get added to any additional shot fired (default 1.0)
+			}
+			"ballistics"
+			{
+				"spread"					"0.5 0.5 0.5"
+				"FireModes"					"semi"
+				"bulletcount"				"1"
+				"maxrange"					"6000"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"9x19mm"
+				"clip_max"					"10"
+				"clip_max_rounds"			"999"
+				"clip_default"				"1"
+			}
+			"attachments"
+			{
+				"attachment_addon"			"pistol"
+			}
+			"kitui_offset"
+			{
+				"position"				"10 2 1"
+			}
+			"team_access"	"security, insurgents"
+            "player_restrictions"
+                        {
+                                "allow_lean"                            "1"
+                                "allow_sprint"                          "1"
+                                "allow_jump"                            "1"
+                                "allow_sway"                            "1"
+                        }
+        }
+
+		"weapon_m9Z"
+		{
+			"import"						"ballistic_base"
+			"weapon_class"					"shotgun"
+			"print_name"					"m9Z"
+			"print_desc"					"m9Z"
+			"view_model"					"models/weapons/v_beretta.mdl"
+			"world_model"					"models/weapons/w_m9.mdl"
+			"rounds_per_minute"				"900"
+			"weapon_slot"					"primary"
+			"act_table"						"shortrifle"
+			"weapon_abilities"				"ironsight"
+			"weapon_weight"					"0"
+			"weapon_cost"					"0"
+			"class_restricted"				"0"
+			"barrel_length"					"18"
+			"bursts"						"2"
+			"burst_delay"					"0.50"
+			
+			"fov"
+			{
+				"fov_wpn_scope"				"0"
+				"fov_plr_ironsight"			"-25"
+				"fov_plr_focus"				"-12"
+				"fov_wpn_default"			"54"
+				"fov_wpn_sprint"			"54"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"79"
+			}
+	
+			"sounds"
+			{
+				"shot_single"				"Weapon_M9.Single"
+				"shot_single_local"			"Weapon_M9.SingleLocal"
+				"shot_silent"				"Weapon_M9.SingleSilenced"
+				"shot_silent_local"			"Weapon_M9.SingleSilencedLocal"
+				"empty"						"Weapon_M9.Empty"
+				"magin"						"Weapon_M9.Clipin"
+				"magout"					"Weapon_M9.Clipout"
+				"slide_back"				"Weapon_M9.slideback"
+				"slide_forward"				"Weapon_M9.slideforward"
+				"safety"					"Weapon_M9.safety"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m590_3rd"
+				"particle_muzzleflash_3rd"	"ins_weapon_at4_frontblast"
+				"particle_tracer"			"weapon_tracers_green"				
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"				"0.0 0.0"
+				"recoil_vertical_range"				"0.0 0.0"
+				"recoil_aim_punch"					"0.0 0.0"
+				"recoil_rest_rate"					"0.0"
+				"recoil_rest_delay"					"0.0 0.0"
+				"recoil_roll_range"					"0.0 0.0"
+				"recoil_roll_rest_rate"				"0.0 0.0"
+				"recoil_shot_reset_time" 			"0.01"	// Time delay for resetting the shots fired counter for the above (default = 0.3)
+				"recoil_punch_additive_factor" 		"0.01"	// How much of the view punch from the previous shot(s) get added to any additional shot fired (default 1.0)
+			}
+			"ballistics"
+			{
+				"spread"					"0.75 0.0 0.75"
+				"FireModes"					"semi, burst"
+				"bulletcount"				"1"
+				"maxrange"					"6000"
+				"tracer_frequency"	"4"
+				"tracer_type"		"whiz_with_line"
+				"tracer_lowammo"	"5"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"buckshot"
+				"clip_max"					"666"
+				"clip_max_rounds"			"666"
+				"clip_default"				"666"
+			}
+			"attachments"
+			{
+				"attachment_addon"			"pistol"
+			}
+			"kitui_offset"
+			{
+				"position"				"10 2 1"
+			}
+			"team_access"	"security, insurgents"
+            "player_restrictions"
+                        {
+                                "allow_lean"                            "1"
+                                "allow_sprint"                          "1"
+                                "allow_jump"                            "1"
+                                "allow_sway"                            "1"
+                        }
+		}				
+		
+		"weapon_m9Z_he"
+		{
+			"import"						"weapon_base"
+			"weapon_class"					"launcher"
+			"weapon_type"					"projectile"
+			"print_name"					"M9Z_HE"
+			"print_desc"					"M9Z_HE"
+			"view_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"world_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"weapon_slot"					"primary"
+			"act_table"						"shortrifle"
+			"attached_act_suffix"			"_GLSETUP"
+			"attached_gesture"				"delta_glsetup"
+			"weapon_weight"					"0"
+			"weapon_cost"					"0"
+			"weapon_abilities"				"ironsight"
+			"fire_instantly"				"1"
+			
+			"sounds"
+			{
+				"shot_single"		 		"Weapon_m203.Single"
+				"shot_single_local"	 		"Weapon_m203.SingleLocal"
+				"empty"				 		"Weapon_m203.Empty"
+				"load"				 		"Weapon_RPG7.Load"
+				"unload"			 		"Weapon_RPG7.Unload"
+				"hit"				 		"Weapon_RPG7.Hit"
+			}
+			"ironsights"
+			{
+				"use_weapon_muzzle"			"1"
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"		"0.0 0.0"
+				"recoil_vertical_range"		"0.0 0.0"
+				"recoil_aim_punch"			"0.0 0.0"
+				"recoil_rest_rate"			"0"
+				"recoil_rest_delay"			"0"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m590_3rd"
+				"particle_muzzleflash_3rd"	"ins_weapon_m203"
+			}
+			"explosives"
+			{
+				"entity"					"grenade_f1"
+				"GrenadeRollSpeed"			"1000"
+				"GrenadeThrowSpeed"			"3000"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"grenade_m9Z_he"
+				"clip_max_rounds"			"1" // 1 rpg per mag
+				"clip_default"				"0"
+			}
+			"freeaim"
+			{
+				"freeaim_distance"				"13"
+				"freeaim_screenratio"			"0.8"
+			}
+			"fov"
+			{
+				"fov_plr_ironsight"			"-5"
+				"fov_plr_focus"				"-10"
+				"fov_wpn_default"			"20"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"74"
+			}
+			
+			"team_access"					"security"		
+		}
+		
+		"weapon_m9Z_sm"
+		{
+			"import"						"weapon_base"
+			"weapon_class"					"launcher"
+			"weapon_type"					"projectile"
+			"print_name"					"M9Z_SM"
+			"print_desc"					"M9Z_SM"
+			"view_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"world_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"weapon_slot"					"primary"
+			"act_table"						"shortrifle"
+			"attached_act_suffix"			"_GLSETUP"
+			"attached_gesture"				"delta_glsetup"
+			"weapon_weight"					"64"
+			"weapon_cost"					"0"
+			"weapon_abilities"				"ironsight"
+			"fire_instantly"				"1"
+			"sounds"
+			{
+				"shot_single"		 		"Weapon_m203.Single"
+				"shot_single_local"	 		"Weapon_m203.SingleLocal"
+				"empty"				 		"Weapon_m203.Empty"
+				"load"				 		"Weapon_RPG7.Load"
+				"unload"			 		"Weapon_RPG7.Unload"
+				"hit"				 		"Weapon_RPG7.Hit"
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"		"0.0 0.0"
+				"recoil_vertical_range"		"0.0 0.0"
+				"recoil_aim_punch"			"0.0 0.0"
+				"recoil_rest_rate"			"0"
+				"recoil_rest_delay"			"0"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m590_3rd"
+				"particle_muzzleflash_3rd"	"ins_weapon_m203"	
+			}
+			"explosives"
+			{
+				"entity"					"grenade_m18"
+				"GrenadeRollSpeed"			"1000"
+				"GrenadeThrowSpeed"			"3000"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"grenade_m9Z_sm"
+				"clip_max_rounds"			"1" // 1 rpg per mag
+				"clip_default"				"0"
+			}
+			"freeaim"
+			{
+				"freeaim_distance"				"13"
+				"freeaim_screenratio"			"0.8"
+			}
+			"fov"
+			{
+				"fov_plr_ironsight"			"-5"
+				"fov_plr_focus"				"-10"
+				"fov_wpn_default"			"20"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"74"
+			}
+			
+			"team_access"					"security"		
+		}
+		
+		"weapon_m9Z_flr"
+		{
+			"import"						"weapon_base"
+			"weapon_class"					"launcher"
+			"weapon_type"					"projectile"
+			"print_name"					"M9Z_FLR"
+			"print_desc"					"M9Z_FLR"
+			"view_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"world_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"weapon_slot"					"primary"
+			"act_table"						"shortrifle"
+			"attached_act_suffix"			"_GLSETUP"
+			"attached_gesture"				"delta_glsetup"
+			"weapon_weight"					"64"
+			"weapon_cost"					"0"
+			"weapon_abilities"				"ironsight"
+			"fire_instantly"				"1"
+			"sounds"
+			{
+				"shot_single"		 		"Weapon_m203.Single"
+				"shot_single_local"	 		"Weapon_m203.SingleLocal"
+				"empty"				 		"Weapon_m203.Empty"
+				"load"				 		"Weapon_RPG7.Load"
+				"unload"			 		"Weapon_RPG7.Unload"
+				"hit"				 		"Weapon_RPG7.Hit"
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"		"0.0 0.0"
+				"recoil_vertical_range"		"0.0 0.0"
+				"recoil_aim_punch"			"0.0 0.0"
+				"recoil_rest_rate"			"0"
+				"recoil_rest_delay"			"0"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m590_3rd"
+				"particle_muzzleflash_3rd"	"ins_weapon_m203"	
+			}
+			"explosives"
+			{
+				"entity"					"grenade_flare"
+				"GrenadeRollSpeed"			"1000"
+				"GrenadeThrowSpeed"			"3000"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"grenade_m9Z_flr"
+				"clip_max_rounds"			"1" // 1 rpg per mag
+				"clip_default"				"0"
+			}
+			"freeaim"
+			{
+				"freeaim_distance"				"13"
+				"freeaim_screenratio"			"0.8"
+			}
+			"fov"
+			{
+				"fov_plr_ironsight"			"-5"
+				"fov_plr_focus"				"-10"
+				"fov_wpn_default"			"20"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"74"
+			}
+			
+			"team_access"					"security"		
+		}
+        
+		"weapon_m9Z_in"
+		{
+			"import"						"weapon_base"
+			"weapon_class"					"launcher"
+			"weapon_type"					"projectile"
+			"print_name"					"M9Z_IN"
+			"print_desc"					"M9Z_IN"
+			"view_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"world_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"weapon_slot"					"primary"
+			"act_table"						"shortrifle"
+			"attached_act_suffix"			"_GLSETUP"
+			"attached_gesture"				"delta_glsetup"
+			"weapon_weight"					"0"
+			"weapon_cost"					"0"
+			"weapon_abilities"				"ironsight"
+			"fire_instantly"				"1"
+			
+			"sounds"
+			{
+				"shot_single"		 		"Weapon_m203.Single"
+				"shot_single_local"	 		"Weapon_m203.SingleLocal"
+				"empty"				 		"Weapon_m203.Empty"
+				"load"				 		"Weapon_RPG7.Load"
+				"unload"			 		"Weapon_RPG7.Unload"
+				"hit"				 		"Weapon_RPG7.Hit"
+			}
+			"ironsights"
+			{
+				"use_weapon_muzzle"			"1"
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"		"0.0 0.0"
+				"recoil_vertical_range"		"0.0 0.0"
+				"recoil_aim_punch"			"0.0 0.0"
+				"recoil_rest_rate"			"0"
+				"recoil_rest_delay"			"0"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m590_3rd"
+				"particle_muzzleflash_3rd"	"ins_weapon_m203"
+			}
+			"explosives"
+			{
+				"entity"					"grenade_anm14"
+				"GrenadeRollSpeed"			"1000"
+				"GrenadeThrowSpeed"			"3000"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"grenade_m9Z_in"
+				"clip_max_rounds"			"1" // 1 rpg per mag
+				"clip_default"				"0"
+			}
+			"freeaim"
+			{
+				"freeaim_distance"				"13"
+				"freeaim_screenratio"			"0.8"
+			}
+			"fov"
+			{
+				"fov_plr_ironsight"			"-5"
+				"fov_plr_focus"				"-10"
+				"fov_wpn_default"			"20"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"74"
+			}
+			
+			"team_access"					"security"		
+		}
+		
+		"weapon_m9Z_mol"
+		{
+			"import"						"weapon_base"
+			"weapon_class"					"launcher"
+			"weapon_type"					"projectile"
+			"print_name"					"M9Z_MOL"
+			"print_desc"					"M9Z_MOL"
+			"view_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"world_model"					"models/weapons/upgrades/a_gl_m203.mdl"
+			"weapon_slot"					"primary"
+			"act_table"						"shortrifle"
+			"attached_act_suffix"			"_GLSETUP"
+			"attached_gesture"				"delta_glsetup"
+			"weapon_weight"					"0"
+			"weapon_cost"					"0"
+			"weapon_abilities"				"ironsight"
+			"fire_instantly"				"1"
+			
+			"sounds"
+			{
+				"shot_single"		 		"Weapon_m203.Single"
+				"shot_single_local"	 		"Weapon_m203.SingleLocal"
+				"empty"				 		"Weapon_m203.Empty"
+				"load"				 		"Weapon_RPG7.Load"
+				"unload"			 		"Weapon_RPG7.Unload"
+				"hit"				 		"Weapon_RPG7.Hit"
+			}
+			"ironsights"
+			{
+				"use_weapon_muzzle"			"1"
+			}
+			"recoil"
+			{
+				"recoil_lateral_range"		"0.0 0.0"
+				"recoil_vertical_range"		"0.0 0.0"
+				"recoil_aim_punch"			"0.0 0.0"
+				"recoil_rest_rate"			"0"
+				"recoil_rest_delay"			"0"
+			}
+			"particles"
+			{
+				"particle_muzzleflash_1st"	"muzzleflash_m590_3rd"
+				"particle_muzzleflash_3rd"	"ins_weapon_m203"
+			}
+			"explosives"
+			{
+				"entity"					"grenade_molotov"
+				"GrenadeRollSpeed"			"1000"
+				"GrenadeThrowSpeed"			"3000"
+			}
+			"ammo_clip"
+			{
+				"ammo_type"					"grenade_m9Z_mol"
+				"clip_max_rounds"			"1" // 1 rpg per mag
+				"clip_default"				"0"
+			}
+			"freeaim"
+			{
+				"freeaim_distance"				"13"
+				"freeaim_screenratio"			"0.8"
+			}
+			"fov"
+			{
+				"fov_plr_ironsight"			"-5"
+				"fov_plr_focus"				"-10"
+				"fov_wpn_default"			"20"
+				"fov_wpn_ironsight"			"74"
+				"fov_wpn_focus"				"74"
+			}
+			
+			"team_access"					"security"		
+		}
+	}
+	
+	"weapon_upgrades"
+	{
+		"sec_flashlight_pistol"
+		{
+			"upgrade_cost"					"0"
+			"class_restricted"				"0"
+			"team_access"					"security"
+			"allowed_weapons"
+                        {
+                                "weapon"                                        "weapon_m9"
+								"weapon"                                        "weapon_m9Z"
+                        }
+		}
+		
+		"underbarrel_gl_base"
+		{
+			"IsBase"						"1"
+			"upgrade_slot"					"underbarrel"
+			"class_restricted"				"0"		
+			"lock_slot"						"explosive"
+		}
+		
+		"HE Launcher"
+		{
+			"import"						"underbarrel_gl_base"
+			"upgrade_cost"					"0"
+			"print_name"					"M9Z Explosive Round"
+			"print_desc"					"M9Z Explosive Round"
+			"attach_weapon"					"weapon_m9Z_he"
+			
+			"viewmodel_attachments"
+			{
+				"Launcher"
+				{
+					"skin"					"0"
 				}
 			}
 			
-			"template_militant_insurgent"
+			"allowed_weapons"
 			{
-				"models"
+				"weapon"					"weapon_m9Z"
+			}	
+		}
+		
+		"SM Launcher"
+		{
+			"import"						"underbarrel_gl_base"
+			"upgrade_cost"					"0"
+			"print_name"					"M9Z Smoke Round"
+			"print_desc"					"M9Z Smoke Round"
+			"attach_weapon"					"weapon_m9Z_sm"
+			
+			"viewmodel_attachments"
+			{
+				"Launcher"
 				{
-					"player"				"models/characters/insurgent_sapper.mdl"
-					"viewmodel_hands" 		"models/weapons/v_hands_ins_l.mdl"
-				}
-				"team"						"insurgents"
-				"buy_order"
-				{
-					"weapon"				"weapon_kabar"
-				}
-				"allowed_weapons"
-				{
-					"weapon"				"weapon_kabar"
+					"skin"					"0"
 				}
 			}
+			
+			"allowed_weapons"
+			{
+				"weapon"					"weapon_m9Z"
+			}	
 		}
-	}	
+		
+		"FLR Launcher"
+		{
+			"import"						"underbarrel_gl_base"
+			"upgrade_cost"					"0"
+			"print_name"					"M9Z Flare Round"
+			"print_desc"					"M9Z Flare Round"
+			"attach_weapon"					"weapon_m9Z_flr"
+			
+			"viewmodel_attachments"
+			{
+				"Launcher"
+				{
+					"skin"					"0"
+				}
+			}
+			
+			"allowed_weapons"
+			{
+				"weapon"					"weapon_m9Z"
+			}	
+		}
+		
+		"INC Launcher"
+		{
+			"import"						"underbarrel_gl_base"
+			"upgrade_cost"					"0"
+			"print_name"					"M9Z Incendiary Round"
+			"print_desc"					"M9Z Incendiary Round"
+			"attach_weapon"					"weapon_m9Z_in"
+			
+			"viewmodel_attachments"
+			{
+				"Launcher"
+				{
+					"skin"					"0"
+				}
+			}
+			
+			"allowed_weapons"
+			{
+				"weapon"					"weapon_m9Z"
+			}	
+		}
+		
+		"MOL Launcher"
+		{
+			"import"						"underbarrel_gl_base"
+			"upgrade_cost"					"0"
+			"print_name"					"M9Z Molotov Round"
+			"print_desc"					"M9Z Molotov Round"
+			"attach_weapon"					"weapon_m9Z_mol"
+			
+			"viewmodel_attachments"
+			{
+				"Launcher"
+				{
+					"skin"					"0"
+				}
+			}
+			
+			"allowed_weapons"
+			{
+				"weapon"					"weapon_m9Z"
+			}	
+		}
+	}
+	
+	"explosives"
+	{
+		"grenade_m9Z_he"
+		{
+			"import"					"baseGrenade"
+			"entity_class"				"grenade_frag"
+			"Model"						"models/weapons/upgrades/a_projectile_m203.mdl"
+			
+			"DetonateDamage"			"170"
+			"DetonatePenetrationRadius" "40"
+			"DetonateDamageRadius"		"750"
+			"FuseTime"					"0.1"
+			"ImpactDetonation"			"1"
+			"ArmDelay"					"0"
+			"RocketStartSpeed"			"3000"
+			
+			"Health"						"50"
+			"ReactExplosions"				"1"
+			"ReactBullets"					"0"
+			
+			"Elasticity"				".6"
+
+			"Deafen"					"0"
+			"AreaDamageTime"			"24"
+			"AreaDamageFrequency"		"0.5"
+			"AreaDamageMinRadius"		"75"
+			"AreaDamageMaxRadius"		"95"
+			"AreaDamageGrowSpeed"		"9"
+			"AreaDamageAmount"			"1"
+			
+			"Particles"
+			{
+				"DetonateParticle"		"ins_rpg_explosion"
+				"DetonateWaterParticle"	"ins_water_explosion"
+				"TrailParticle"			"molotov_trail"
+				"BroadcastAll"			"1"
+				"FollowOrigin"			"1"
+				"NormalUp"				"1"
+			}
+			"Sounds"
+			{
+				"DetonateSound"			"BaseGrenade.Explode"
+				"BounceSound"			"Flare.Burn"
+			}
+		}
+		
+		"grenade_m9Z_sm"
+		{
+			"import"					"baseGrenade"
+			"entity_class"				"grenade_smoke"
+			"Model"						"models/weapons/upgrades/a_projectile_m203.mdl"
+			"FuseTime"					"0.1"
+			"ImpactDetonation"			"1"
+			"ArmDelay"					"0"
+			"RocketStartSpeed"			"3000"
+			
+			"Health"						"50"
+			"ReactExplosions"				"1"
+			"ReactBullets"					"1"
+			
+			"Particles"
+			{
+				"DetonateParticle"		"m203_smokegrenade"
+				"SmokeColor"			"40 35 33 252" // why does the alpha have to be set so damn high?
+			}
+			
+			"Sounds"
+			{
+				"DetonateSound"			"Weapon_m203.SmokeExplode"
+				"BounceSound"			"Weapon_M67.Bounce"
+			}
+		}
+		
+		"grenade_m9Z_flr"
+		{
+			"import"					"baseGrenade"
+			"entity_class"				"grenade_aoe"
+			"Model"						"models/weapons/w_flare_projectile.mdl"
+			"DamageType"				"DMG_BURN, DMG_PREVENT_PHYSICS_FORCE"
+			"DetonateDamage"			"1" // det damage is for when it first goes off
+			"DetonatePenetrationRadius" "0"
+			"DetonateDamageRadius"		"64"
+			"FuseTime"					"0.1"
+			"ImpactDetonation"			"1"
+			"ArmDelay"					"0"
+			"RocketStartSpeed"			"3000"
+			"Cookable"					"0"
+			"DetonateUnderwater"		"0"
+			"ShakeAmplitude"			"0"
+
+			"Elasticity"				"0.1"
+
+			"Deafen"					"0"
+			"AreaDamageTime"			"24"
+			"AreaDamageFrequency"		"0.5"
+			"AreaDamageMinRadius"		"75"
+			"AreaDamageMaxRadius"		"95"
+			"AreaDamageGrowSpeed"		"9"
+			"AreaDamageAmount"			"1"
+			
+			"Health"						"50"
+			"ReactExplosions"				"1"
+			"ReactBullets"					"1"
+			
+			"Particles"
+			{
+				"DetonateParticle"		"ins_flaregun_flare"
+				"DetonateWaterParticle"	"ins_flaregun_flare"
+				"TrailParticle"			"ins_flaregun_trail"
+				"BroadcastAll"			"1"
+				"FollowOrigin"			"1"
+				"NormalUp"				"1"
+			}
+			"Sounds"
+			{
+				"DetonateSound"			"Flare.Burn"
+				"BounceSound"			""
+			}
+		}
+		
+		"grenade_m9Z_in"
+		{
+			"import"					"baseGrenade"
+			"entity_class"				"grenade_aoe"
+			"Model"						"models/weapons/w_anm14.mdl"
+			"DamageType"				"DMG_BURN, DMG_PREVENT_PHYSICS_FORCE"
+			"DetonateDamage"			"100" // det damage is for when it first goes off
+			"DetonatePenetrationRadius" "0"
+			"DetonateDamageRadius"		"240"
+			"FuseTime"					"0.1"
+			"ImpactDetonation"			"1"
+			"ArmDelay"					"0"
+			"RocketStartSpeed"			"3000"
+			"DetonateUnderwater"		"0"
+			"Cookable"					"0"
+			"ShakeAmplitude"			"0"
+			"Elasticity"				"0.1"
+
+			"Deafen"					"0"
+			"AreaDamageTime"			"24"
+			"AreaDamageFrequency"		"0.38"
+			"AreaDamageMinRadius"		"120"
+			"AreaDamageMaxRadius"		"160"
+			"AreaDamageGrowSpeed"		"20"
+			"AreaDamageAmount"			"76"
+
+			"Health"						"50"
+			"ReactExplosions"				"1"
+			"ReactBullets"					"1"
+			
+			"Particles"
+			{
+				"DetonateParticle"		"ins_thermite_explosion"
+				"DetonateWaterParticle"	"ins_thermite_explosion"
+				"BroadcastAll"			"1"
+				"FollowOrigin"			"1"
+			}
+			"Sounds"
+			{
+				"DetonateSound"			"ANM14Incendiary.Burn"
+				"BounceSound"			"Weapon_M67.Bounce"
+			}
+		}
+		
+		"grenade_m9Z_mol"
+		{
+			"import"					"baseGrenade"
+			"entity_class"				"grenade_aoe"
+			"Model"						"models/weapons/w_molotov.mdl"
+			"DamageType"				"DMG_BURN, DMG_PREVENT_PHYSICS_FORCE"
+			"DetonateDamage"			"100" // det damage is for when it first goes off
+			"DetonatePenetrationRadius" "0"
+			"DetonateDamageRadius"		"240"
+			"FuseTime"					"0"
+			"Cookable"					"0"
+			"DetonateUnderwater"		"0"
+			"ImpactDetonation"			"1"
+			"RocketStartSpeed"			"2000"
+			"ShakeAmplitude"			"0"
+
+			"Elasticity"				"0.0"
+
+			"Deafen"					"0"
+			"AreaDamageTime"			"24"
+			"AreaDamageFrequency"		"0.44"
+			"AreaDamageMinRadius"		"240"
+			"AreaDamageMaxRadius"		"260"
+			"AreaDamageGrowSpeed"		"9"
+			"AreaDamageAmount"			"18"
+			
+			"Health"						"50"
+			"ReactExplosions"				"1"
+			"ReactBullets"					"1"
+			
+			"Particles"
+			{
+				"DetonateParticle"		"ins_molotov_explosion"
+				"DetonateWaterParticle"	"ins_molotov_explosion"
+				"TrailParticle"			"molotov_trail"
+				"BroadcastAll"			"1"
+				"FollowOrigin"			"1"
+				"NormalUp"				"1"
+			}
+			"Sounds"
+			{
+				"DetonateSound"			"Molotov.Burn"
+				"BounceSound"			"Weapon_M67.Bounce"
+			}
+		}
+	}
+		
+	"ammo"
+	{
+		"00buck"
+		{
+			"import"				"default"
+			"bulletcount"			"7"
+			"damageType"			"DMG_BUCKSHOT"
+			"brass_model"			"models/weapons/shells/12guage.mdl"
+			"brass_sound"			"BOUNCE_SHOTSHELL"
+			"tracer_frequency"	"4"
+			"tracer_type"		"whiz_with_line"
+			"tracer_lowammo"	"5"
+			
+			"Damage"
+			{
+				"500"				"40"
+				"1000"				"20"
+				"2000"            	"10"
+				"4000"				"5"
+			}	
+			"PenetrationPower"
+			{
+				"1000"						"100" 
+				"8000"						"10" 
+			}			
+			"DamageHitgroups"
+			{
+				"HITGROUP_HEAD"					"2.00"
+				"HITGROUP_CHEST"			  	"0.60"
+				"HITGROUP_STOMACH"				"0.60"
+				"HITGROUP_LEFTARM"				"1.00"
+				"HITGROUP_RIGHTARM"				"1.00"
+				"HITGROUP_LEFTLEG"				"1.00"
+				"HITGROUP_RIGHTLEG"				"1.00"
+			}
+		}
+		
+		"buckshot"
+		{
+			"import"   					"00buck"
+			"carry"						"666"	
+			"tracer_frequency"	"4"
+			"tracer_type"		"whiz_with_line"
+			"tracer_lowammo"	"1"
+		}
+		
+		"9x19mm"
+		{
+			"import"   					"9x19"
+			"carry"						"666"	
+			"tracer_frequency"	"4"
+			"tracer_type"		"whiz_with_line"
+			"tracer_lowammo"	"1"
+		}
+		
+	}
+	
 }

@@ -3,7 +3,6 @@
 #include <loghelper>
 #include <wstatshelper>
 #include <clientprefs>
-//#include <smlib>
 
 #pragma semicolon 1
 
@@ -22,13 +21,47 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	LoadTranslations("common.phrases");
-	//LoadTranslations("myplugin.phrases");
 	HookEvent( "player_death", Event_PlayerDeath );
 	HookEvent( "player_spawn", Event_PlayerSpawn);
 	RegConsoleCmd("sm_shotty", Cmd_sm_shotty);
 	RegConsoleCmd("sm_primary", Cmd_sm_primary);
 	RegConsoleCmd("sm_explosive", Cmd_sm_grenade);
+	RegConsoleCmd("sm_m9z", Cmd_sm_m9z);
+	RegConsoleCmd("sm_test", test);
 }
+
+public Action:test(client, args)
+{
+    if(client != 0 && IsClientInGame(client) && IsPlayerAlive(client))
+    {
+        new ent_index = GetPlayerWeaponSlot(client, 0);
+
+        if(ent_index == -1)
+        {
+            //No weapon
+            return Plugin_Handled;
+        }
+
+        // weapon clip
+        new clip1 = GetEntProp(ent_index, Prop_Send, "m_iClip1");
+
+        //when clip1 return value 255, it's actually NULL, not in use. Grenades, knife. Set value then -1
+        clip1 = clip1 == 255 ? -1:clip1;
+
+        // player ammo
+        new m_iAmmo_array_index = GetEntProp(ent_index, Prop_Send, "m_iPrimaryAmmoType");
+        new m_iAmmo_array_ammo = -1; // default NULL value if weapon not have ammo type
+
+        if(m_iAmmo_array_index != -1)
+        {
+            m_iAmmo_array_ammo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iAmmo_array_index);
+        }
+
+        PrintToChat(client, "Weapon m_iClip1 %i / player m_iAmmo %i", clip1, m_iAmmo_array_ammo);
+    }
+
+    return Plugin_Handled;
+}  
 
 public Action:Cmd_sm_shotty(client, args)
 {
@@ -63,6 +96,17 @@ public Action:Cmd_sm_grenade(client, args)
 	return Plugin_Handled;
 }
 
+public Action:Cmd_sm_m9z(client, args)
+{
+	if (client == 0)
+	{
+		ReplyToCommand(client, "%t", "Command is in-game only");
+		return Plugin_Handled;
+	}
+	ShowMenuM9Z(client);
+	return Plugin_Handled;
+}
+
 public Action:Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 { 
 	g_kill_stats[MAXPLAYERS][LOG_HIT_KILLS] = 0;
@@ -72,13 +116,11 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 {
 	new victim   	= GetClientOfUserId(GetEventInt(event, "userid"));
 	new attacker 	= GetClientOfUserId(GetEventInt(event, "attacker"));
-	new hitgroup  = GetEventInt(event, "hitgroup");
 	
 	g_kill_stats[attacker][LOG_HIT_KILLS]++;
 	g_kill_stats[victim][LOG_HIT_DEATHS]++;
 	
 	new killcount = g_kill_stats[attacker][LOG_HIT_KILLS];
-	new headshots = g_kill_stats[attacker][LOG_HIT_HEADSHOTS];
 	
 	if (killcount == 10)
 	{
@@ -94,15 +136,80 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		ShowMenuExplosive(attacker);
 	}
-	
-	if (headshots == 10)
+	if (killcount == 50)
 	{
-		GivePlayerItem(attacker, "weapon_rpg");
-		PrintToChat(attacker, "10 headshots for RPG");
+		ShowMenuExplosive(attacker);
+	}
+	if (killcount == 70)
+	{
+		ShowMenuExplosive(attacker);
+	}
+	if (killcount == 90)
+	{
+		ShowMenuExplosive(attacker);
+	}
+	
+	if (killcount == 100)
+	{
+		ShowMenuM9Z(attacker);
 	}
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 }
 
+ShowMenuM9Z(client)
+{
+	new Handle:menu = CreateMenu(wM9Z, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
+	SetMenuTitle(menu, "CHOOSE THE M9Z");
+
+	AddMenuItem(menu, "M9Z", "M9Z");
+
+	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+}
+
+public wM9Z(Handle:menu, MenuAction:action, param1, param2)
+{
+	switch (action)
+	{
+		case MenuAction_Select:
+		{
+			//param1 is client, param2 is item
+
+			new String:item[64];
+			GetMenuItem(menu, param2, item, sizeof(item));
+
+			if (StrEqual(item, "M9Z"))
+			{
+				GivePlayerItem(param1, "weapon_m9z");
+				new shotty = GetPlayerWeaponSlot(param1, 0);
+				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
+			}			
+		}
+
+		case MenuAction_End:
+		{
+			//param1 is MenuEnd reason, if canceled param2 is MenuCancel reason
+			CloseHandle(menu);
+
+		}
+
+		case MenuAction_DisplayItem:
+		{
+			//param1 is client, param2 is item
+
+			new String:item[64];
+			GetMenuItem(menu, param2, item, sizeof(item));
+
+			if (StrEqual(item, "M9Z"))
+			{
+				new String:translation[128];
+				Format(translation, sizeof(translation), "%T", "M9Z", param1);
+				return RedrawMenuItem(translation);
+			}
+		}
+
+	}
+	return 0;
+}
 
 ShowMenuShotgun(client)
 {
@@ -133,23 +240,14 @@ public wShotty(Handle:menu, MenuAction:action, param1, param2)
 				GivePlayerItem(param1, "weapon_m590");
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 20");	
-								
-				
+				SetAmmo(param1, 0, 24);
 			}
 			else if (StrEqual(item, "TOZ"))
 			{
 				GivePlayerItem(param1, "weapon_toz");
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 20");
-				
-
+				SetAmmo(param1, 0, 24);
 			}
 		}
 
@@ -190,6 +288,7 @@ ShowMenuPrimary(client)
 	new Handle:menu = CreateMenu(wPrimary, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
 	SetMenuTitle(menu, "CHOOSE AN ASSAULT RIFLE");
 
+	AddMenuItem(menu, "3 Mags", "3 Mags");
 	AddMenuItem(menu, "MP5K", "MP5K");
 	AddMenuItem(menu, "UMP45", "UMP45");
 	AddMenuItem(menu, "AK74", "AK 74");
@@ -211,97 +310,62 @@ public wPrimary(Handle:menu, MenuAction:action, param1, param2)
 
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
-
+			if (StrEqual(item, "3 Mags"))
+			{
+				new weapon = GetPlayerWeaponSlot(param1, 0);
+				new ammo = GetEntProp(weapon, Prop_Send, "m_iAmmo", 1);
+				SetAmmo(param1, 0, 3);
+			}
 			if (StrEqual(item, "MP5K"))
 			{
 				GivePlayerItem(param1, "weapon_mp5");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-					
-
+				SetAmmo(param1, 0, 3);
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
 				GivePlayerItem(param1, "weapon_ump45");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-						
-
+				SetAmmo(param1, 0, 3);
 			}
 			else if (StrEqual(item, "AK74"))
 			{
 				GivePlayerItem(param1, "weapon_ak74");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-						
-
+				SetReserveAmmo(param1, 3);
 			}
 			else if (StrEqual(item, "AKM"))
 			{
 				GivePlayerItem(param1, "weapon_akm");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
+				new ammo = GetEntProp(shotty, Prop_Data, "m_iPrimaryAmmoType");
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-						
-
+				GivePlayerAmmo(param1, 3, ammo, false);
+				//SetAmmo(param1, 0, 3);
 			}
 			else if (StrEqual(item, "M16A4"))
 			{
 				GivePlayerItem(param1, "weapon_m16a4");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-				
-
+				SetAmmo(param1, 0, 3);
 			}
 			else if (StrEqual(item, "M4A1"))
 			{
 				GivePlayerItem(param1, "weapon_m4a1");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-						
-
+				SetAmmo(param1, 0, 3);
 			}
 			else if (StrEqual(item, "MK18"))
 			{
 				GivePlayerItem(param1, "weapon_mk18");
-				//SetEntProp("weapon_m590", Prop_Data, "m_iClip1", 20);
 				new shotty = GetPlayerWeaponSlot(param1, 0);
 				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
-				
-				//giving 20 ammo
-				UnCheat(param1);
-				FakeClientCommand(param1, "give_ammo 3");	
-				
-
+				SetAmmo(param1, 0, 3);
 			}
 		}
 
@@ -374,6 +438,8 @@ ShowMenuExplosive(client)
 
 	AddMenuItem(menu, "RPG", "RPG");
 	AddMenuItem(menu, "AT4", "AT4");
+	AddMenuItem(menu, "FRAG", "FRAG");
+	AddMenuItem(menu, "ANM14", "ANM14");
 	AddMenuItem(menu, "C4", "C4");
 	AddMenuItem(menu, "IED", "IED");
 
@@ -400,6 +466,17 @@ public wExplosive(Handle:menu, MenuAction:action, param1, param2)
 			{
 				GivePlayerItem(param1, "weapon_at4");
 
+			}
+			else if (StrEqual(item, "FRAG"))
+			{
+				GivePlayerItem(param1, "weapon_m67_frag");
+
+			}
+			else if (StrEqual(item, "ANM14"))
+			{
+				GivePlayerItem(param1, "weapon_anm14");
+				new shotty = GetPlayerWeaponSlot(param1, 4);
+				SetEntPropEnt(param1, Prop_Send, "m_hActiveWeapon", shotty);
 			}
 			else if (StrEqual(item, "C4"))
 			{
@@ -459,24 +536,24 @@ public wExplosive(Handle:menu, MenuAction:action, param1, param2)
 	return 0;
 }
 
-UnCheat(client)
+stock SetAmmo(client, wepslot, newAmmo)
 {
-		new flags;
-		flags  = GetCommandFlags("give_ammo");
-		flags &= ~FCVAR_CHEAT;
-		flags &= ~FCVAR_SPONLY;
-		SetCommandFlags("give_ammo", flags);
+	new weapon = GetPlayerWeaponSlot(client, wepslot);
+	if (IsValidEntity(weapon))
+	{
+		new iOffset = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType", 1)*4;
+		new iAmmoTable = FindSendPropOffs("CINSPlayer", "m_iAmmo");
+		SetEntData(client, iAmmoTable+iOffset, newAmmo, 4, true);
+	}
 }
 
-/*weapon upgrades
-remove_upgrade "mol launcher"
-give_upgrade "he launcher"
-kills = 100 for m9z
-kills = 150 for attachments
-"HE Launcher"
-"SM Launcher"
-"FLR Launcher"
-"MOL Launcher"
-"INC Launcher"
-*/
-
+stock SetReserveAmmo(client, ammo)
+{
+    new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+    if(weapon < 1) return;
+    
+    new ammotype = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
+    if(ammotype == -1) return;
+    
+    SetEntProp(client, Prop_Send, "m_iAmmo", ammo, _, ammotype);
+}  
