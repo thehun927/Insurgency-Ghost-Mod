@@ -375,7 +375,6 @@ public ShotgunUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_shotgun");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_shotgun");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Foregrip"))
 			{
@@ -383,7 +382,6 @@ public ShotgunUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_foregrip2");
 				FakeClientCommand(SECclient, "give_upgrade ins_foregrip2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
@@ -391,13 +389,13 @@ public ShotgunUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer_heavy");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer_heavy");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -554,42 +552,33 @@ public MP5KUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_band");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_mp5");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_mp5");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -609,42 +598,33 @@ public UMP45Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_ump45");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_ump45");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -664,42 +644,33 @@ public AK74Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_band");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Kobra Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_kobra");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_ak74");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_ak74");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -719,42 +690,33 @@ public AKMUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_band");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Kobra Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_kobra");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_akm");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_akm");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -774,49 +736,38 @@ public M16A4Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m16a4");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m16a4");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Heavy Barrel"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -836,49 +787,38 @@ public M4A1Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m4");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m4");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Heavy Barrel"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
@@ -898,49 +838,38 @@ public MK18Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer2");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m4");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m4");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Heavy Barrel"))
 			{
 				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
-				FakeClientCommand(SECclient, "slot2");
-				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
 		case MenuAction_End:
 		{
 			CloseHandle(menu);
+			FakeClientCommand(SECclient, "slot1");
 		}
 	}
 	return 0;
