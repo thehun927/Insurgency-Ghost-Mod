@@ -1,19 +1,10 @@
 #include <sourcemod>
 #include <sdktools>
-#include <loghelper>
-#include <wstatshelper>
 
 #pragma semicolon 1
+#define LOG_HIT_KILLS      2
 
 new g_kill_stats[MAXPLAYERS+1][15];
-
-new mp5;
-new ump;
-new ak;
-new akm;
-new m16;
-new m4;
-new mk18;
 
 public Plugin:myinfo =
 {
@@ -59,7 +50,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		ShowUpgradeMenu(attacker);
 	}
-	else if (killcount == 70)
+	else if (killcount == 75)
 	{
 		ShowUpgradeMenu(attacker);
 	}
@@ -98,6 +89,7 @@ ShowShotgunUpgrades(client)
 	AddMenuItem(menu, "Foregrip", "Foregrip");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowPrimaryWeapons(client)
@@ -112,6 +104,7 @@ ShowPrimaryWeapons(client)
 	AddMenuItem(menu, "M4A1", "M4A1");
 	AddMenuItem(menu, "MK18", "MK18");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowUpgradeMenu(client)
@@ -134,6 +127,7 @@ ShowExplosiveMenu(client)
 	AddMenuItem(menu, "Frag", "Frag");
 	AddMenuItem(menu, "C4", "C4");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowMP5KUpgrades(client)
@@ -144,6 +138,7 @@ ShowMP5KUpgrades(client)
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowUMP45Upgrades(client)
@@ -154,6 +149,7 @@ ShowUMP45Upgrades(client)
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowAK74Upgrades(client)
@@ -164,6 +160,7 @@ ShowAK74Upgrades(client)
 	AddMenuItem(menu, "Kobra Sight", "Kobra Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowAKMUpgrades(client)
@@ -174,6 +171,7 @@ ShowAKMUpgrades(client)
 	AddMenuItem(menu, "Kobra Sight", "Kobra Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowM16A4Upgrades(client)
@@ -184,6 +182,7 @@ ShowM16A4Upgrades(client)
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowM4A1Upgrades(client)
@@ -194,6 +193,7 @@ ShowM4A1Upgrades(client)
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 ShowMK18Upgrades(client)
@@ -204,6 +204,7 @@ ShowMK18Upgrades(client)
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	SetMenuExitBackButton(menu, true);
 }
 
 KillMenu(client)
@@ -214,40 +215,63 @@ KillMenu(client)
 	DisplayMenu(menu, client, 1);
 }
 
+ShotgunAmmo(client)
+{
+	new weapon = GetPlayerWeaponSlot(client, 0);
+	decl String:classname[128];
+	GetEdictClassname(weapon, classname, sizeof(classname));
+	SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+	if (StrEqual(classname, "weapon_m590"))
+	{
+		FakeClientCommand(client, "give_ammo 21");
+	}
+	else if (StrEqual(classname, "weapon_toz"))
+	{
+		FakeClientCommand(client, "give_ammo 21");
+	}
+	else
+	{
+		return;
+	}
+}
+
 FindAttachmentMenu(client)
 {
-	if (mp5 == 1)
+	new weapon = GetPlayerWeaponSlot(client, 0);
+	decl String:classname[128];
+	GetEdictClassname(weapon, classname, sizeof(classname));
+	SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+	if (StrEqual(classname, "weapon_mp5"))
 	{
 		ShowMP5KUpgrades(client);
 	}
-	else if (ump == 1)
+	else if (StrEqual(classname, "weapon_ump45"))
 	{
 		ShowUMP45Upgrades(client);
 	}
-	else if (ak == 1)
+	else if (StrEqual(classname, "weapon_ak74"))
 	{
 		ShowAK74Upgrades(client);
 	}
-	else if (akm == 1)
+	else if (StrEqual(classname, "weapon_akm"))
 	{
 		ShowAKMUpgrades(client);
 	}
-	else if (m16 == 1)
+	else if (StrEqual(classname, "weapon_m16a4"))
 	{
 		ShowM16A4Upgrades(client);
 	}
-	else if (m4 == 1)
+	else if (StrEqual(classname, "weapon_m4a1"))
 	{
 		ShowM4A1Upgrades(client);
 	}
-	else if (mk18 == 1)
+	else if (StrEqual(classname, "weapon_mk18"))
 	{
 		ShowMK18Upgrades(client);
 	}
 	else
 	{
-		PrintCenterText(client, "Switch to your primary weapon");
-		FindAttachmentMenu(client);
+		PrintCenterText(client, "You don't have a gun, Stupid!");
 	}
 }
 
@@ -298,6 +322,9 @@ public firstMenuUpgrade(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Ammo"))
 			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				ShotgunAmmo(SECclient);
 				FakeClientCommand(SECclient, "give_ammo 3");
 			}
 			if (StrEqual(item, "Attachments"))
@@ -330,18 +357,33 @@ public ShotgunUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_shotgun");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_shotgun");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Foregrip"))
 			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_foregrip2");
 				FakeClientCommand(SECclient, "give_upgrade ins_foregrip2");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer_heavy");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer_heavy");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -369,7 +411,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				mp5 = 1;
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
@@ -377,7 +418,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				ump = 1;
 			}
 			else if (StrEqual(item, "AK74"))
 			{
@@ -385,7 +425,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				ak = 1;
 			}
 			else if (StrEqual(item, "AKM"))
 			{
@@ -393,7 +432,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				akm = 1;
 			}
 			else if (StrEqual(item, "M16A4"))
 			{
@@ -401,7 +439,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				m16 = 1;
 			}
 			else if (StrEqual(item, "M4A1"))
 			{
@@ -409,7 +446,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				m4 = 1;
 			}
 			else if (StrEqual(item, "MK18"))
 			{
@@ -417,7 +453,6 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				SetReserveAmmo(SECclient, 3);
-				mk18 = 1;
 			}
 			CloseCheats();
 		}
@@ -441,7 +476,13 @@ public UpgradeMenu(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Ammo"))
 			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				ShotgunAmmo(SECclient);
 				FakeClientCommand(SECclient, "give_ammo 3");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);				
 			}
 			else if (StrEqual(item, "Attachments"))
 			{
@@ -514,20 +555,29 @@ public MP5KUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_band");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -552,20 +602,29 @@ public UMP45Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -590,20 +649,29 @@ public AK74Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_band");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Kobra Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_kobra");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -628,20 +696,29 @@ public AKMUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_band");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Kobra Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_kobra");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -666,20 +743,29 @@ public M16A4Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -704,20 +790,29 @@ public M4A1Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -742,20 +837,29 @@ public MK18Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "Flashlight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				new seWeapon = GetPlayerWeaponSlot(SECclient, 1);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer2");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", seWeapon);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
 		}
@@ -780,13 +884,13 @@ public EmptyMenu(Handle:menu, MenuAction:action, SECclient, param2)
 
 stock SetReserveAmmo(client, ammo)
 {
-    new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-    if(weapon < 1) return;
-    
-    new ammotype = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
-    if(ammotype == -1) return;
-    
-    SetEntProp(client, Prop_Send, "m_iAmmo", ammo, _, ammotype);
+	OpenCheats();
+	new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+	if(weapon < 1) return;
+	new ammotype = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
+	if(ammotype == -1) return;
+	SetEntProp(client, Prop_Send, "m_iAmmo", ammo, _, ammotype);
+	CloseCheats();
 }  
 
 stock OpenCheats()
@@ -798,10 +902,4 @@ stock CloseCheats()
 {
 	SetConVarBool(FindConVar("sv_cheats"), false, false);
 	SetConVarBool(FindConVar("ins_bot_knives_only"), true, true);
-}
-
-stock GetActiveWeapon(client)
-{
-	new weapon =  GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-	return weapon;
 }
