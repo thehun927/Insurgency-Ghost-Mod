@@ -306,15 +306,13 @@ public firstMenuShotgun(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "M590"))
 			{
 				FakeClientCommand(SECclient, "give_weapon m590");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 32);
 			}
 			else if (StrEqual(item, "TOZ"))
 			{
 				FakeClientCommand(SECclient, "give_weapon toz");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 32);
 			}
 			CloseCheats();
@@ -339,10 +337,10 @@ public firstMenuUpgrade(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Ammo"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				ShotgunAmmo(SECclient);
 				FakeClientCommand(SECclient, "give_ammo 3");
+				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Attachments"))
 			{
@@ -374,27 +372,26 @@ public ShotgunUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_shotgun");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_shotgun");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Foregrip"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_foregrip2");
 				FakeClientCommand(SECclient, "give_upgrade ins_foregrip2");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer_heavy");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer_heavy");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -419,50 +416,43 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 			if (StrEqual(item, "MP5K"))
 			{
 				FakeClientCommand(SECclient, "give_weapon mp5");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3); //this is a bug and does not seem to set the magazine count
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
 				FakeClientCommand(SECclient, "give_weapon ump45");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3);
 			}
 			else if (StrEqual(item, "AK74"))
 			{
 				FakeClientCommand(SECclient, "give_weapon ak74");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3);
 			}
 			else if (StrEqual(item, "AKM"))
 			{
 				FakeClientCommand(SECclient, "give_weapon akm");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3);
 			}
 			else if (StrEqual(item, "M16A4"))
 			{
 				FakeClientCommand(SECclient, "give_weapon m16a4");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3);
 			}
 			else if (StrEqual(item, "M4A1"))
 			{
 				FakeClientCommand(SECclient, "give_weapon m4a1");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3);
 			}
 			else if (StrEqual(item, "MK18"))
 			{
 				FakeClientCommand(SECclient, "give_weapon mk18");
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				SetReserveAmmo(SECclient, 3);
 			}
 			CloseCheats();
@@ -487,11 +477,10 @@ public UpgradeMenu(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Ammo"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				ShotgunAmmo(SECclient);
 				FakeClientCommand(SECclient, "give_ammo 3");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Attachments"))
 			{
@@ -563,38 +552,33 @@ public MP5KUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_band");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_mp5");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_mp5");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -618,38 +602,33 @@ public UMP45Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_ump45");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_ump45");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -673,38 +652,33 @@ public AK74Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_band");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Kobra Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_kobra");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_ak74");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_ak74");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -728,38 +702,33 @@ public AKMUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_flashlight_band");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			if (StrEqual(item, "Kobra Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_kobra");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_akm");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_akm");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -783,45 +752,39 @@ public M16A4Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m16a4");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m16a4");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Heavy Barrel"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -845,45 +808,39 @@ public M4A1Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m4");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m4");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Heavy Barrel"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
@@ -907,45 +864,39 @@ public MK18Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "Flashlight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Red-Dot Sight"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade optic_aimpoint");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Suppressor"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer2");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Hollow Point"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m4");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Armor Piercing"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m4");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			else if (StrEqual(item, "Heavy Barrel"))
 			{
-				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
-				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "slot1");
 			}
 			CloseCheats();
 		}
