@@ -404,7 +404,7 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_weapon mp5");
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 3); //this is a bug and does not seem to set the magazine count
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
