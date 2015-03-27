@@ -11,7 +11,7 @@ public Plugin:myinfo =
 	name = "Killstreak Menu",
 	author = "RIPPEDnFADED",
 	description = "",
-	version = "2.0.0",
+	version = "1.8.0",
 	url = "http://info.420blaze.me"
 }
 
