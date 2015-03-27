@@ -137,6 +137,8 @@ ShowMP5KUpgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -148,6 +150,8 @@ ShowUMP45Upgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -159,6 +163,8 @@ ShowAK74Upgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Kobra Sight", "Kobra Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -170,6 +176,8 @@ ShowAKMUpgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Kobra Sight", "Kobra Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -181,6 +189,9 @@ ShowM16A4Upgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
+	AddMenuItem(menu, "Heavy Barrel", "Heavy Barrel");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -192,6 +203,9 @@ ShowM4A1Upgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
+	AddMenuItem(menu, "Heavy Barrel", "Heavy Barrel");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -203,6 +217,9 @@ ShowMK18Upgrades(client)
 	AddMenuItem(menu, "Flashlight", "Flashlight");
 	AddMenuItem(menu, "Red-Dot Sight", "Red-Dot Sight");
 	AddMenuItem(menu, "Suppressor", "Suppressor");
+	AddMenuItem(menu, "Hollow Point", "Hollow Point");
+	AddMenuItem(menu, "Armor Piercing", "Armor Piercing");
+	AddMenuItem(menu, "Heavy Barrel", "Heavy Barrel");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
 	SetMenuExitBackButton(menu, true);
 }
@@ -551,7 +568,7 @@ public MP5KUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_band");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
-			if (StrEqual(item, "Red-Dot Sight"))
+			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
@@ -563,6 +580,20 @@ public MP5KUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_mp5");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_mp5");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
@@ -592,7 +623,7 @@ public UMP45Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
-			if (StrEqual(item, "Red-Dot Sight"))
+			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
@@ -604,6 +635,20 @@ public UMP45Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_ump45");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_ump45");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
@@ -647,6 +692,20 @@ public AK74Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_ak74");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_ak74");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
 			CloseCheats();
 		}
 		case MenuAction_End:
@@ -688,6 +747,20 @@ public AKMUpgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade ins_silencer");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_akm");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_akm");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
 			CloseCheats();
 		}
 		case MenuAction_End:
@@ -715,7 +788,7 @@ public M16A4Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
-			if (StrEqual(item, "Red-Dot Sight"))
+			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
@@ -727,6 +800,27 @@ public M16A4Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m16a4");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m16a4");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Heavy Barrel"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
@@ -756,7 +850,7 @@ public M4A1Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
-			if (StrEqual(item, "Red-Dot Sight"))
+			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
@@ -768,6 +862,27 @@ public M4A1Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m4");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m4");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Heavy Barrel"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
@@ -797,7 +912,7 @@ public MK18Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				FakeClientCommand(SECclient, "give_upgrade sec_flashlight_rail");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
-			if (StrEqual(item, "Red-Dot Sight"))
+			else if (StrEqual(item, "Red-Dot Sight"))
 			{
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
@@ -809,6 +924,27 @@ public MK18Upgrades(Handle:menu, MenuAction:action, SECclient, param2)
 				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 				FakeClientCommand(SECclient, "give_upgrade sec_silencer2");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Hollow Point"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_hp_m4");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Armor Piercing"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade ammo_ap_m4");
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+			}
+			else if (StrEqual(item, "Heavy Barrel"))
+			{
+				new prWeapon = GetPlayerWeaponSlot(SECclient, 0);
+				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
+				FakeClientCommand(SECclient, "give_upgrade heavybarrel");
 				SetEntPropEnt(SECclient, Prop_Send, "m_hActiveWeapon", prWeapon);
 			}
 			CloseCheats();
