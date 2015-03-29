@@ -50,11 +50,19 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		ShowUpgradeMenu(attacker);
 	}
-	else if (killcount == 75)
+	else if (killcount == 70)
 	{
 		ShowUpgradeMenu(attacker);
 	}
 	else if (killcount == 90)
+	{
+		ShowUpgradeMenu(attacker);
+	}
+	else if (killcount == 100)
+	{
+		//ShowHunnidUpgradeMenu(attacker);
+	}
+	else if (killcount == 120)
 	{
 		ShowUpgradeMenu(attacker);
 	}
@@ -307,13 +315,13 @@ public firstMenuShotgun(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "give_weapon m590");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 32);
+				SetReserveAmmo(SECclient, 0, 32);
 			}
 			else if (StrEqual(item, "TOZ"))
 			{
 				FakeClientCommand(SECclient, "give_weapon toz");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 32);
+				SetReserveAmmo(SECclient, 0, 32);
 			}
 			CloseCheats();
 		}
@@ -415,43 +423,43 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 			{
 				FakeClientCommand(SECclient, "give_weapon mp5");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3); //this is a bug and does not seem to set the magazine count
+				SetReserveAmmo(SECclient, 0, 0); //this is a bug and does not seem to set the magazine count
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
 				FakeClientCommand(SECclient, "give_weapon ump45");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 0, 0);
 			}
 			else if (StrEqual(item, "AK74"))
 			{
 				FakeClientCommand(SECclient, "give_weapon ak74");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 0, 0);
 			}
 			else if (StrEqual(item, "AKM"))
 			{
 				FakeClientCommand(SECclient, "give_weapon akm");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 0, 0);
 			}
 			else if (StrEqual(item, "M16A4"))
 			{
 				FakeClientCommand(SECclient, "give_weapon m16a4");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 0, 0);
 			}
 			else if (StrEqual(item, "M4A1"))
 			{
 				FakeClientCommand(SECclient, "give_weapon m4a1");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 0, 0);
 			}
 			else if (StrEqual(item, "MK18"))
 			{
 				FakeClientCommand(SECclient, "give_weapon mk18");
 				FakeClientCommand(SECclient, "slot1");
-				SetReserveAmmo(SECclient, 3);
+				SetReserveAmmo(SECclient, 0, 0);
 			}
 			CloseCheats();
 		}
@@ -886,15 +894,13 @@ public EmptyMenu(Handle:menu, MenuAction:action, SECclient, param2)
 	}
 }
 
-stock SetReserveAmmo(client, ammo)
+stock SetReserveAmmo(client, slot, ammo)
 {
-	OpenCheats();
-	new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-	if(weapon < 1) return;
-	new ammotype = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
-	if(ammotype == -1) return;
-	SetEntProp(client, Prop_Send, "m_iAmmo", ammo, _, ammotype);
-	CloseCheats();
+	new weapon = GetPlayerWeaponSlot(client, slot);
+	new iOffset = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType", 1)*4;
+	new iAmmoTable = FindSendPropInfo("CINSPlayer", "m_iAmmo");
+	SetEntData(client, iAmmoTable+iOffset, ammo, 4, true);
+	FakeClientCommand(client, "give_ammo 3");
 }  
 
 stock OpenCheats()
