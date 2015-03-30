@@ -913,8 +913,9 @@ stock SetZeroAmmo(client, slot, ammo)
 
 stock RemovePrimary(client)
 {
-	new prWeapon = GetPlayerWeaponSlot(client, 0);
-	RemovePlayerItem = (client, prWeapon);	
+	new ent = GetPlayerWeaponSlot(client, 0);
+	RemovePlayerItem(client, ent);
+	RemoveEdict(ent);
 }	
 
 stock OpenCheats()
