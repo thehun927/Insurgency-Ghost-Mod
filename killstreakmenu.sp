@@ -18,8 +18,15 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	HookEvent("player_death", Event_PlayerDeath);
-	HookEvent("player_spawn", Event_PlayerSpawn);	
+	HookEvent("player_spawn", Event_PlayerSpawn);
+	HookEvent("player_team", Event_ChangeTeam);
 	SetConVarFlags(FindConVar("sv_cheats"), GetConVarFlags(FindConVar("sv_cheats")) & ~FCVAR_NOTIFY);
+}
+
+public Action:Event_ChangeTeam(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	KillMenu(client);
 }
 
 public Action:Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
@@ -68,7 +75,6 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	}
 	
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
-	KillMenu(victim);
 }
 
 ShowfirstMenuShotgun(client)
