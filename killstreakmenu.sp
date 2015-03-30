@@ -421,42 +421,49 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "MP5K"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon mp5");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon ump45");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3);
 			}
 			else if (StrEqual(item, "AK74"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon ak74");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3);
 			}
 			else if (StrEqual(item, "AKM"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon akm");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3);
 			}
 			else if (StrEqual(item, "M16A4"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon m16a4");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3);
 			}
 			else if (StrEqual(item, "M4A1"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon m4a1");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3);
 			}
 			else if (StrEqual(item, "MK18"))
 			{
+				RemovePrimary(SECclient);
 				FakeClientCommand(SECclient, "give_weapon mk18");
 				FakeClientCommand(SECclient, "slot1");
 				SetZeroAmmo(SECclient, 0, 3);
@@ -901,7 +908,14 @@ stock SetZeroAmmo(client, slot, ammo)
 	new iOffset = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType", 1)*4;
 	new iAmmoTable = FindSendPropInfo("CINSPlayer", "m_iAmmo");
 	SetEntData(client, iAmmoTable+iOffset, ammo, 4, true);
+	SetEntData(weapon, iAmmoTable+iOffset, ammo, 4, true);
 }  
+
+stock RemovePrimary(client)
+{
+	new prWeapon = GetPlayerWeaponSlot(client, 0);
+	RemovePlayerItem = (client, prWeapon);	
+}	
 
 stock OpenCheats()
 {
