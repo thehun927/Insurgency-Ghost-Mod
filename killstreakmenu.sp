@@ -21,6 +21,12 @@ public OnPluginStart()
 	HookEvent("player_spawn", Event_PlayerSpawn);
 	HookEvent("player_team", Event_ChangeTeam);
 	SetConVarFlags(FindConVar("sv_cheats"), GetConVarFlags(FindConVar("sv_cheats")) & ~FCVAR_NOTIFY);
+	RegConsoleCmd("sm_menu", Cmd_sm_menu);
+}
+
+public Action:Cmd_sm_menu(client, args)
+{
+	ShowUpgradeMenu(client);
 }
 
 public Action:Event_ChangeTeam(Handle:event, const String:name[], bool:dontBroadcast)
@@ -73,7 +79,6 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		ShowUpgradeMenu(attacker);
 	}
-	
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
 }
 
@@ -81,6 +86,7 @@ ShowfirstMenuShotgun(client)
 {
 	new Handle:menu = CreateMenu(firstMenuShotgun, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
 	SetMenuTitle(menu, "Select your first reward");
+	AddMenuItem(menu, "Health", "Health");
 	AddMenuItem(menu, "M590", "M590");
 	AddMenuItem(menu, "TOZ", "TOZ");
 	DisplayMenu(menu, client, MENU_TIME_FOREVER);
@@ -90,6 +96,7 @@ ShowfirstMenuUpgrade(client)
 {
 	new Handle:menu = CreateMenu(firstMenuUpgrade, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
 	SetMenuTitle(menu, "Select your upgrade path");
+	AddMenuItem(menu, "Health", "Health");
 	AddMenuItem(menu, "Ammo", "Ammo");
 	AddMenuItem(menu, "Attachments", "Attachments");
 	AddMenuItem(menu, "Primary's", "Primary's");
@@ -126,6 +133,7 @@ ShowUpgradeMenu(client)
 {
 	new Handle:menu = CreateMenu(UpgradeMenu, MENU_ACTIONS_DEFAULT | MenuAction_DisplayItem);
 	SetMenuTitle(menu, "Select your upgrade path");
+	AddMenuItem(menu, "Health", "Health");
 	AddMenuItem(menu, "Ammo", "Ammo");
 	AddMenuItem(menu, "Attachments", "Attachments");
 	AddMenuItem(menu, "Primary's", "Primary's");
@@ -318,6 +326,14 @@ public firstMenuShotgun(Handle:menu, MenuAction:action, SECclient, param2)
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
 			
+			if (StrEqual(item, "Health"))
+			{
+				new addhealth= 25;
+				new health = GetEntProp(SECclient, Prop_Send, "m_iHealth") + addhealth;
+				SetEntProp(SECclient, Prop_Send, "m_iHealth", health);
+				PrintHintText(SECclient, "%i /125HP", health);	
+			}
+			
 			if (StrEqual(item, "M590"))
 			{
 				FakeClientCommand(SECclient, "give_weapon m590");
@@ -349,6 +365,14 @@ public firstMenuUpgrade(Handle:menu, MenuAction:action, SECclient, param2)
 			OpenCheats();
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
+			
+			if (StrEqual(item, "Health"))
+			{
+				new addhealth= 25;
+				new health = GetEntProp(SECclient, Prop_Send, "m_iHealth") + addhealth;
+				SetEntProp(SECclient, Prop_Send, "m_iHealth", health);
+				PrintHintText(SECclient, "%i /125HP", health);
+			}
 			
 			if (StrEqual(item, "Ammo"))
 			{
@@ -428,54 +452,116 @@ public PrimaryWeapons(Handle:menu, MenuAction:action, SECclient, param2)
 			
 			if (StrEqual(item, "MP5K"))
 			{
-				RemovePrimary(SECclient);
-				FakeClientCommand(SECclient, "give_weapon mp5");
-				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				new ent = GetPlayerWeaponSlot(SECclient, 0); // What weapon is currently in primary
+				FakeClientCommand(SECclient, "give_weapon mp5"); // Give new weapon
+				FakeClientCommand(SECclient, "slot1"); // This sometimes doesn't work
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0); // What new weapon is in primary
+				if (ent == ent2) // If the weapons are the same don't delete but continue otherwise T Pose
+				{
+				SetZeroAmmo(SECclient, 0, 3); // Clears clips and set at 3 clips
+				}
+				else // The weapons are different so continue
+				{
+				SetZeroAmmo(SECclient, 0, 3); // Clears clips and set at 3 clips
+				RemoveEdict(ent);	// Remove old gun ent
+				}
 			}
 			else if (StrEqual(item, "UMP45"))
 			{
-				RemovePrimary(SECclient);
+				new ent = GetPlayerWeaponSlot(SECclient, 0);
 				FakeClientCommand(SECclient, "give_weapon ump45");
 				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3);
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0);
+				if (ent == ent2)
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				}
+				else
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				RemoveEdict(ent);
+				}
 			}
 			else if (StrEqual(item, "AK74"))
 			{
-				RemovePrimary(SECclient);
+				new ent = GetPlayerWeaponSlot(SECclient, 0);
 				FakeClientCommand(SECclient, "give_weapon ak74");
 				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3);
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0);
+				if (ent == ent2)
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				}
+				else
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				RemoveEdict(ent);
+				}
 			}
 			else if (StrEqual(item, "AKM"))
 			{
-				RemovePrimary(SECclient);
+				new ent = GetPlayerWeaponSlot(SECclient, 0);
 				FakeClientCommand(SECclient, "give_weapon akm");
 				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3);
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0);
+				if (ent == ent2)
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				}
+				else
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				RemoveEdict(ent);
+				}
 			}
 			else if (StrEqual(item, "M16A4"))
 			{
-				RemovePrimary(SECclient);
+				new ent = GetPlayerWeaponSlot(SECclient, 0);
 				FakeClientCommand(SECclient, "give_weapon m16a4");
 				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3);
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0);
+				if (ent == ent2)
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				}
+				else
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				RemoveEdict(ent);
+				}
 			}
 			else if (StrEqual(item, "M4A1"))
 			{
-				RemovePrimary(SECclient);
+				new ent = GetPlayerWeaponSlot(SECclient, 0);
 				FakeClientCommand(SECclient, "give_weapon m4a1");
 				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3);
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0);
+				if (ent == ent2)
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				}
+				else
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				RemoveEdict(ent);
+				}
 			}
 			else if (StrEqual(item, "MK18"))
 			{
-				RemovePrimary(SECclient);
+				new ent = GetPlayerWeaponSlot(SECclient, 0);
 				FakeClientCommand(SECclient, "give_weapon mk18");
 				FakeClientCommand(SECclient, "slot1");
-				SetZeroAmmo(SECclient, 0, 3);
+				new ent2 = GetPlayerWeaponSlot(SECclient, 0);
+				if (ent == ent2)
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				}
+				else
+				{
+				SetZeroAmmo(SECclient, 0, 3); //this is a bug and does not seem to set the magazine count
+				RemoveEdict(ent);
+				}
 			}
-			//FakeClientCommand(SECclient, "give_ammo 3");
 			CloseCheats();
 		}
 		case MenuAction_End:
@@ -495,6 +581,14 @@ public UpgradeMenu(Handle:menu, MenuAction:action, SECclient, param2)
 			OpenCheats();
 			new String:item[64];
 			GetMenuItem(menu, param2, item, sizeof(item));
+			
+			if (StrEqual(item, "Health"))
+			{
+				new addhealth= 25;
+				new health = GetEntProp(SECclient, Prop_Send, "m_iHealth") + addhealth;
+				SetEntProp(SECclient, Prop_Send, "m_iHealth", health);
+				PrintHintText(SECclient, "%i /125HP", health);
+			}
 			
 			if (StrEqual(item, "Ammo"))
 			{
