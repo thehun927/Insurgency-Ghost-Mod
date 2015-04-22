@@ -5,6 +5,8 @@
 #define LOG_HIT_KILLS      2
 
 new g_kill_stats[MAXPLAYERS+1][15];
+new g_WeaponParent;
+
 
 public Plugin:myinfo =
 {
@@ -22,6 +24,8 @@ public OnPluginStart()
 	HookEvent("player_team", Event_ChangeTeam);
 	SetConVarFlags(FindConVar("sv_cheats"), GetConVarFlags(FindConVar("sv_cheats")) & ~FCVAR_NOTIFY);
 	RegConsoleCmd("sm_menu", Cmd_sm_menu);
+	
+	g_WeaponParent = FindSendPropOffs("CINSWeapon", "m_hOwnerEntity");
 }
 
 public Action:Cmd_sm_menu(client, args)
@@ -39,6 +43,16 @@ public Action:Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroa
 { 
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	KillMenu(client);
+	
+	new ragdoll = GetEntPropEnt(client, Prop_Send, "m_hRagdoll");
+	if (ragdoll == -1)
+	{
+		
+	}
+	else
+	{
+	RemoveEdict(ragdoll);
+	}	
 }
 
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
@@ -47,6 +61,9 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	new victim = GetClientOfUserId(GetEventInt(event, "userid"));
 	g_kill_stats[attacker][LOG_HIT_KILLS] ++;
 	new killcount = g_kill_stats[attacker][LOG_HIT_KILLS];
+	
+	PrintHintText(attacker, "%i kills", killcount);
+	
 	if (killcount == 10)
 	{
 		ShowfirstMenuShotgun(attacker);
@@ -80,6 +97,33 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 		ShowUpgradeMenu(attacker);
 	}
 	g_kill_stats[victim][LOG_HIT_KILLS] = 0;
+	
+	new vkillcount = g_kill_stats[victim][LOG_HIT_KILLS];
+	
+	PrintHintText(victim, "%i kills", vkillcount);
+	
+	new maxent = GetMaxEntities(), String:wepname[64];
+	for (new i=GetMaxClients();i<maxent;i++)
+	{
+			if ( IsValidEdict(i) && IsValidEntity(i) )
+			{
+				GetEdictClassname(i, wepname, sizeof(wepname));
+				if(StrContains(wepname, "weapon_") != -1 && GetEntDataEnt2(i, g_WeaponParent) == -1 )
+					{
+					RemoveEdict(i);
+					}
+			}
+	}
+
+		decl String:classname[128];
+		GetEdictClassname(victim, classname, sizeof(classname));
+	
+		if (StrEqual(classname, "turned"))
+		{
+		DispatchKeyValue(victim, "teamnumber","2");
+		SetEntityModel(victim, "models/characters/civilian_vip_02.mdl");
+		DispatchKeyValue(victim, "classname","playa");
+		}
 }
 
 ShowfirstMenuShotgun(client)
