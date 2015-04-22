@@ -62,7 +62,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	g_kill_stats[attacker][LOG_HIT_KILLS] ++;
 	new killcount = g_kill_stats[attacker][LOG_HIT_KILLS];
 	
-	PrintHintText(attacker, "%i kills", killcount);
+	PrintToChat(attacker, "%i kills", killcount);
 	
 	if (killcount == 10)
 	{
@@ -100,7 +100,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	
 	new vkillcount = g_kill_stats[victim][LOG_HIT_KILLS];
 	
-	PrintHintText(victim, "%i kills", vkillcount);
+	PrintToChat(victim, "%i kills", vkillcount);
 	
 	new maxent = GetMaxEntities(), String:wepname[64];
 	for (new i=GetMaxClients();i<maxent;i++)
